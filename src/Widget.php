@@ -23,4 +23,8 @@ abstract class Widget {
     {}
 
     abstract function html(): string;
+    public function label() : string {
+        return '<label for="'.$this->name.'">'.$this->caption.'</label>';
+
+    }
 }

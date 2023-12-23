@@ -2,7 +2,7 @@
 declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use Artumi\Forms\Form;
-use Artumi\Forms\Widgets\Text;
+use Artumi\Forms\Widget\Text;
 
 class TextInputForm extends Form
 {
