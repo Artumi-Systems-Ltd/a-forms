@@ -1,5 +1,5 @@
 {
-    "name": "Artumi-Systems-Ltd/a-forms",
+    "name": "artumi-systems-ltd/a-forms",
     "description": "Form builder for laravel",
     "type": "library",
     "license": "MIT",
@@ -11,14 +11,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "YourVendorName\\YourPackageName\\": "src/"
+            "Artumi\\Forms\\": "src/"
         }
     },
     "require": {
         "php": "^8.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^10.5"
     },
     "config": {
         "sort-packages": true
