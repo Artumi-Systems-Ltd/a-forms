@@ -36,4 +36,10 @@ class Form {
         $s.='</form>';
         return $s;
     }
+    public function __get(string $sName) : Widget {
+        return $this->widgets[$sName];
+    }
+    public function __set(string $sName, $value) : void {
+        $this->widgets[$sName]->set($value);
+    }
 }

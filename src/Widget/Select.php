@@ -15,9 +15,10 @@ class Select extends Widget {
     }
     public function html() : string {
         $s= $this->label().'<select name="'.$this->name.'">';
+        $val = $this->get();
         foreach($this->options() as $option)
         {
-            $s.='<option value="'.$option->value.'">'.$option->caption.'</option>';
+            $s.=$option->html($val);
         }
         $s.='</select>';
         return $s;

@@ -20,6 +20,7 @@ use InvalidArgumentException;
 **/
 abstract class Widget {
     public
+    $value,
     $form,
     $defaults=[],
     $allowed=[];
@@ -31,6 +32,12 @@ abstract class Widget {
     {}
 
     abstract function html(): string;
+    public function set($value){
+        $this->value=$value;
+    }
+    public function get(){
+        return $this->value;
+    }
     public function label() : string {
         return '<label for="'.$this->name.'">'.$this->caption.'</label>';
 
