@@ -30,6 +30,6 @@ class TextArea extends Widget {
 
     public function html() : string {
 
-        return '<textarea '.$this->attribString().'></textarea>';
+        return '<textarea '.$this->attribString().'>'.htmlspecialchars($this->get(),ENT_QUOTES).'</textarea>';
     }
 }

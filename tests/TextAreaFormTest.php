@@ -21,11 +21,20 @@ class TextAreaFormTest extends TestCase
         $form = new TextAreaForm('frmTest');
         $html = $form->html();
         $dom = new DOMDocument();
-        @$dom->loadHTML($html);
+        $dom->loadHTML($html);
         $this->assertEquals('frmTest',$dom->getElementById('frmTest')->id,"Form has correct ID");
         $this->assertEquals('frmTest_description',$dom->getElementById('frmTest_description')->id, "Textarea has correct default ID");
         $this->assertEquals(60,$dom->getElementById('frmTest_description')->getAttribute("cols"), "Cols has correct default value");
         $this->assertEquals(5,$dom->getElementById('frmTest_description')->getAttribute("rows"), "Rows has correct default value");
 
+        $sTestText='<textarea rows="20"> test';
+
+
+        $form->description=$sTestText;
+        $html= $form->html();
+        $dom = new DomDocument();
+        $dom->loadHTML($html);
+        $textarea = $dom->getElementById('frmTest_description');
+        $this->assertEquals($sTestText, $textarea->nodeValue, "Textarea can contain html");
     }
 }
