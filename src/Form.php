@@ -6,6 +6,11 @@ class Form {
     private
     $widgets=[],
     $buttons=[];
+    public function __construct(public string $id){}
+
+    public function id() : string {
+        return $this->id;
+    }
 
     public function addButton(string $name, string $value) : void
     {
@@ -13,12 +18,13 @@ class Form {
     }
     public function addWidget(Widget $widget)
     {
+        $widget->setForm($this);
         $this->widgets[$widget->name]=$widget;
     }
 
     public function html() : string
     {
-        $s='<form>';
+        $s='<form id="'.htmlspecialchars($this->id,ENT_QUOTES).'">';
         foreach($this->widgets as $widget)
         {
             $s.=$widget->html();

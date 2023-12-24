@@ -22,13 +22,11 @@ class Select extends Widget {
         $s.='</select>';
         return $s;
     }
-
     public function staticOptions(array $options)
     {
         $this->options=[];
         foreach($options as $k=>$v)
         {
-
             $this->options[$k]=new Option($k,$v);
         }
     }

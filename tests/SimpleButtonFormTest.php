@@ -5,7 +5,7 @@ use Artumi\Forms\Form;
 
 class SimpleButtonForm extends Form
 {
-    public function __construct()
+    public function __construct(public string $id)
     {
         $this->addButton('ok','Submit');
 
@@ -16,8 +16,8 @@ class SimpleButtonFormTest extends TestCase
 {
     public function testHTML() : void
     {
-        $form = new SimpleButtonForm();
+        $form = new SimpleButtonForm('frmSimpleButton');
         $html = $form->html();
-        $this->assertEquals('<form><button name="ok">Submit</button></form>', $html,'Basic form');
+        $this->assertEquals('<form id="frmSimpleButton"><button name="ok">Submit</button></form>', $html,'Basic form');
     }
 }
