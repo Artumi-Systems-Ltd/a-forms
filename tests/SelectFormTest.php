@@ -23,7 +23,7 @@ class SelectFormTest extends TestCase
 
         $form->colour='red';
         $html = $form->html();
-        $this->assertEquals('<form id="frmSelect"><label for="colour">Colour</label><select name="colour"><option value="red" selected >Red</option>'
+        $this->assertEquals('<form id="frmSelect"><label for="frmSelect_colour">Colour</label><select name="colour"><option value="red" selected >Red</option>'
                             .'<option value="blue">Blue</option><option value="green">Green</option></select><button name="ok">Submit</button></form>', $html,'Basic form');
     }
 }

@@ -39,7 +39,7 @@ abstract class Widget {
         return $this->value;
     }
     public function label() : string {
-        return '<label for="'.$this->name.'">'.$this->caption.'</label>';
+        return '<label for="'.$this->id().'">'.$this->caption.'</label>';
 
     }
     public function attribString()
