@@ -18,7 +18,12 @@ class TextInputFormTest extends TestCase
     public function testHTML() : void
     {
         $form = new TextInputForm('frmTextArea');
+        $form->name='Richard';
         $html = $form->html();
-        $this->assertEquals('<form id="frmTextArea"><label for="name">Name</label><input name="name" type="text" /><button name="ok">Submit</button></form>', $html,'Basic form');
+        $this->assertEquals('<form id="frmTextArea"><label for="name">Name</label><input name="name" type="text" value="Richard"/><button name="ok">Submit</button></form>', $html,'Basic form');
+        $sText ='Richard\'s Quote Test "';
+        $form->name=$sText;
+        $html = $form->html();
+        $this->assertEquals('<form id="frmTextArea"><label for="name">Name</label><input name="name" type="text" value="'.htmlspecialchars($sText,ENT_QUOTES).'"/><button name="ok">Submit</button></form>', $html,'Basic form');
     }
 }
