@@ -26,6 +26,8 @@ class TextArea extends Widget {
         'required',
         'spellcheck',
         'wrap',
+        'class',
+        'style',
     ];
 
     public function html() : string {

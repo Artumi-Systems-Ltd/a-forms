@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Artumi\Forms;
 
 use Artumi\Forms\Form;
+use Artumi\Forms\Trait\Attributes;
 use InvalidArgumentException;
 
 
@@ -19,6 +20,8 @@ use InvalidArgumentException;
 * @class
 **/
 abstract class Widget {
+    use Attributes;
+
     public
     $value,
     $form,
@@ -62,18 +65,5 @@ abstract class Widget {
         if($this->form)
             return $this->form->id().'_'.$this->name;
         return $this->name.'asd';
-    }
-    public function attrib(string $name, $default='')
-    {
-        if(isset($this->attribs[$name]))
-            return $this->attribs;
-        return $default;
-    }
-    public function setAttrib(string $name, string $value)
-    {
-        if(!isset($this->allowed[$name]))
-            throw new InvalidArgumentException("The attrib \"$name\" is not allowed on this type of Widget ");
-        $this->attrib[$name]=$value;
-
     }
 }

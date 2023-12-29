@@ -37,4 +37,16 @@ class TextAreaFormTest extends TestCase
         $textarea = $dom->getElementById('frmTest_description');
         $this->assertEquals($sTestText, $textarea->nodeValue, "Textarea can contain html");
     }
+    public function testInvalidArgument() : void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $form = new TextAreaForm('frmTest');
+        $form->description->setAttribute('class-wrong','My class');
+    }
+    public function testValidArgument() : void
+    {
+        $form = new TextAreaForm('frmTest');
+        $form->description->setAttribute('class','My-class');
+        $this->assertEquals('My-class',$form->description->attrib('class'));
+    }
 }
