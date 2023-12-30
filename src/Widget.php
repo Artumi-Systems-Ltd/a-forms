@@ -64,6 +64,6 @@ abstract class Widget {
             return $this->attrib('id');
         if($this->form)
             return $this->form->id().'_'.$this->name;
-        return $this->name.'asd';
+        return $this->name;
     }
 }
