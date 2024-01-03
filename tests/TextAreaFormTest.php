@@ -49,4 +49,10 @@ class TextAreaFormTest extends TestCase
         $form->description->setAttribute('class','My-class');
         $this->assertEquals('My-class',$form->description->attrib('class'));
     }
+    public function testPopulate() : void
+    {
+        $form = new TextAreaForm('frmTest');
+        $form->populate(['description'=>'</textarea>','ok'=>'']);
+        $this->assertEquals('</textarea>',$form->description->get(),'</textarea> returned properbly de-escaped');
+    }
 }

@@ -21,4 +21,10 @@ class DualButtonFormTest extends TestCase
         $html = $form->html();
         $this->assertEquals('<form id="frmDualButton"><button name="ok">Submit</button><button name="cancel">Cancel</button></form>', $html,'Basic form');
     }
+    public function testPopulate()
+    {
+        $form = new DualButtonForm('frmDualButton');
+        $form->populate(['cancel'=>'']);
+        $this->assertEquals('cancel',$form->buttonPressed(),'Cancel was pressed');
+    }
 }

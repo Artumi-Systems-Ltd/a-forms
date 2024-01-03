@@ -20,4 +20,11 @@ class SimpleButtonFormTest extends TestCase
         $html = $form->html();
         $this->assertEquals('<form id="frmSimpleButton"><button name="ok">Submit</button></form>', $html,'Basic form');
     }
+    public function testPopulate(): void
+    {
+        $form = new SimpleButtonForm('frmSimpleButton');
+        $form->populate(['ok'=>'']);
+        $this->assertEquals('ok',$form->buttonPressed(),'OK was pressed');
+
+    }
 }

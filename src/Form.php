@@ -3,9 +3,10 @@
 namespace Artumi\Forms;
 
 class Form {
-    private
-    $widgets=[],
-    $buttons=[];
+    private string $buttonPressed='';
+    private array  $widgets=[];
+    private array  $buttons=[];
+
     public function __construct(public string $id){}
 
     public function id() : string {
@@ -41,5 +42,19 @@ class Form {
     }
     public function __set(string $sName, $value) : void {
         $this->widgets[$sName]->set($value);
+    }
+    public function populate(array $a) : void {
+        foreach ($a as $k=>$v)
+        {
+            if(isset($this->widgets[$k]))
+                $this->widgets[$k]->set($v);
+            else if (isset($this->buttons[$k]))
+                $this->buttonPressed=$k;
+        }
+
+    }
+    public function buttonPressed() : string
+    {
+        return $this->buttonPressed;
     }
 }

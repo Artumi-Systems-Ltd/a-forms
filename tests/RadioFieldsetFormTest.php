@@ -38,4 +38,10 @@ class RadioFieldsetFormTest extends TestCase
         $this->assertIsObject($type, 'Radio input with id frmRadio_type_new found');
         $this->assertEquals('checked', $type->getAttribute('checked'), 'New option is checked');
     }
+    public function testPopulate() : void
+    {
+        $form = new RadioFieldsetForm('frmRadio');
+        $form->populate(['type'=>'archive']);
+        $this->assertEquals('archive',$form->type->get(),'Radio set to archive');
+    }
 }

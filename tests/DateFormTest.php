@@ -26,4 +26,11 @@ class DateFormTest extends TestCase
         $startdate = $dom->getElementById('frmDate_startdate');
         $this->assertEquals(date('Y-m-d'), $startdate->getAttribute('value'), 'Date contains start value');
     }
+    public function testPopulate() : void
+    {
+        $form = new DateForm('frmDate');
+        $form->populate(['startdate'=>'2024-01-01','ok'=>'']);
+        $this->assertEquals('2024-01-01',$form->startdate->get(Date::FORMAT));
+
+    }
 }
