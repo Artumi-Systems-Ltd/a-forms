@@ -29,4 +29,15 @@ class TextInputFormTest extends TestCase
         $form->populate(['name'=>'Mandy','ok'=>'']);
         $this->assertEquals('Mandy',$form->name->get(),'Mandy populated');
     }
+
+
+    public function testPack(): void
+    {
+        $form = new TextInputForm('frmTextArea');
+        $form->name='Richard';
+        $a = $form->pack();
+        $this->assertCount(1, $a, "Pack has 1 elements");
+        $this->assertTrue(isset($a['name']),'There is an element with "name" as the key');
+        $this->assertEquals('Richard',$a['name'],'The "name" is "Richard"');
+    }
 }

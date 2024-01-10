@@ -27,4 +27,13 @@ class DualButtonFormTest extends TestCase
         $form->populate(['cancel'=>'']);
         $this->assertEquals('cancel',$form->buttonPressed(),'Cancel was pressed');
     }
+
+    public function testPack(): void
+    {
+        $form = new DualButtonForm('frmDualButton');
+        $form->populate(['cancel'=>'']);
+        $a = $form->pack();
+        $this->assertCount(1, $a, "Pack has 1 elements");
+        $this->assertTrue(isset($a['cancel']),'There is an element with "cancel" as the key');
+    }
 }

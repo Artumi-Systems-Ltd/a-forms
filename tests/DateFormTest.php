@@ -33,4 +33,15 @@ class DateFormTest extends TestCase
         $this->assertEquals('2024-01-01',$form->startdate->get(Date::FORMAT));
 
     }
+
+    public function testPack(): void
+    {
+        $form = new DateForm('frmSimpleButton');
+        $form->populate(['startdate'=>'2024-01-01','ok'=>'']);
+        $a = $form->pack();
+        $this->assertCount(2, $a, "Pack has 2 elements");
+        $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');
+        $this->assertTrue(isset($a['startdate']),'There is an element with "startdate" as the key');
+        $this->assertEquals('2024-01-01',$a['startdate'],'Start date is 2024-01-01');
+    }
 }

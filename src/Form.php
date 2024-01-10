@@ -57,4 +57,16 @@ class Form {
     {
         return $this->buttonPressed;
     }
+    public function pack() : array {
+        $a=[];
+        foreach($this->widgets as $name=>$widget)
+        {
+            $a[$name]=$widget->get();
+        }
+        if($this->buttonPressed)
+        {
+            $a[$this->buttonPressed]='';
+        }
+        return $a;
+    }
 }

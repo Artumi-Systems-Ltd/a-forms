@@ -44,4 +44,15 @@ class RadioFieldsetFormTest extends TestCase
         $form->populate(['type'=>'archive']);
         $this->assertEquals('archive',$form->type->get(),'Radio set to archive');
     }
+
+    public function testPack(): void
+    {
+        $form = new RadioFieldsetForm('frmRadio');
+        $form->populate(['type'=>'archive','ok'=>'']);
+        $a = $form->pack();
+        $this->assertCount(2, $a, "Pack has 2 elements");
+        $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');
+        $this->assertTrue(isset($a['type']),'There is an element with "type" as the key');
+        $this->assertEquals('archive',$a['type'],'The "Type" is "archive"');
+    }
 }

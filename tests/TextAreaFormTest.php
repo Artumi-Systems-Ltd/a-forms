@@ -55,4 +55,17 @@ class TextAreaFormTest extends TestCase
         $form->populate(['description'=>'</textarea>','ok'=>'']);
         $this->assertEquals('</textarea>',$form->description->get(),'</textarea> returned properbly de-escaped');
     }
+
+
+    public function testPack(): void
+    {
+        $form = new TextAreaForm('frmTest');
+        $form->populate(['description'=>'</textarea>','ok'=>'']);
+        $a = $form->pack();
+        $this->assertCount(2, $a, "Pack has 2 elements");
+        $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');
+        $this->assertTrue(isset($a['description']),'There is an element with "description" as the key');
+        $this->assertEquals('</textarea>',$a['description'],'The "description" is "</textarea>"');
+    }
+
 }
