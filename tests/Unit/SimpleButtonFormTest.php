@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Artumi\Forms\Form;
 
 class SimpleButtonForm extends Form
@@ -9,6 +9,10 @@ class SimpleButtonForm extends Form
     {
         $this->addButton('ok','Submit');
 
+    }
+    public function validators() : array {
+        return [
+        ];
     }
 }
 

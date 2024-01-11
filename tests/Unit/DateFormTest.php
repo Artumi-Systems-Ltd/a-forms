@@ -1,8 +1,12 @@
 <?php
 declare(strict_types=1);
-use PHPUnit\Framework\TestCase;
+namespace Tests ;
+
+use Tests\TestCase;
 use Artumi\Forms\Form;
 use Artumi\Forms\Widget\Date;
+use DateTime;
+use DomDocument;
 
 class DateForm extends Form
 {
@@ -10,6 +14,11 @@ class DateForm extends Form
     {
         $this->addWidget(new Date('startdate','Start Date'));
         $this->addButton('ok','Submit');
+    }
+    public function validators() : array {
+        return [
+            'startdate'=>'required',
+        ];
     }
 }
 

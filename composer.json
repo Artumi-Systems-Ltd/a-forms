@@ -14,10 +14,20 @@
             "Artumi\\Forms\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "laravel/framework": ">=10.0"
     },
     "require-dev": {
+        "orchestra/testbench": "^8.20",
         "phpunit/phpunit": "^10.5"
     },
     "config": {
@@ -26,6 +36,18 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test": "vendor/bin/phpunit --colors=always tests"
+        "test": "vendor/bin/phpunit --colors=always  --bootstrap=vendor/autoload.php tests",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ]
     }
 }

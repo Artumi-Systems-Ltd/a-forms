@@ -2,10 +2,14 @@
 
 namespace Artumi\Forms;
 
-class Form {
+use Illuminate\Support\Facades\Validator as FValidator;
+use Illuminate\Validation\Validator;
+
+abstract class Form {
     private string $buttonPressed='';
     private array  $widgets=[];
     private array  $buttons=[];
+    private Validator|null $lastValidator;
 
     public function __construct(public string $id){}
 
@@ -69,4 +73,12 @@ class Form {
         }
         return $a;
     }
+    abstract public function validators() : array ;
+    public function validate() : bool {
+        $validator = FValidator::make($this->pack(), $this->validators());
+        $this->lastValidator=$validator;
+        return $validator->passes();
+
+    }
+
 }

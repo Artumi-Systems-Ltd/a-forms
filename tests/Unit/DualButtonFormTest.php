@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Artumi\Forms\Form;
 
 class DualButtonForm extends Form
@@ -10,6 +10,11 @@ class DualButtonForm extends Form
         $this->addButton('ok','Submit');
         $this->addButton('cancel','Cancel');
 
+    }
+
+    public function validators() : array {
+        return [
+        ];
     }
 }
 

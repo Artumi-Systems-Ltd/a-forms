@@ -5,3 +5,4 @@
 .phpcd/
 vendor/
 .env
+.phpunit.result.cache

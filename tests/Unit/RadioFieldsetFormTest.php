@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Artumi\Forms\Form;
 use Artumi\Forms\Widget\RadioFieldset;
 
@@ -12,6 +12,11 @@ class RadioFieldsetForm extends Form
         $type->staticOptions(['new'=>'New','old'=>'Old','archive'=>'Archive']);
         $this->addWidget($type);
         $this->addButton('ok','Submit');
+    }
+    public function validators() : array {
+        return [
+            'type'=>'required',
+        ];
     }
 }
 
