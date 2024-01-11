@@ -1,26 +1,11 @@
 <?php
 declare(strict_types=1);
 namespace Tests ;
-
 use Tests\TestCase;
-use Artumi\Forms\Form;
-use Artumi\Forms\Widget\Date;
+use Tests\Forms\DateForm;
 use DateTime;
 use DomDocument;
-
-class DateForm extends Form
-{
-    public function __construct(public string $id)
-    {
-        $this->addWidget(new Date('startdate','Start Date'));
-        $this->addButton('ok','Submit');
-    }
-    public function validators() : array {
-        return [
-            'startdate'=>'required',
-        ];
-    }
-}
+use Artumi\Forms\Widget\Date;
 
 class DateFormTest extends TestCase
 {

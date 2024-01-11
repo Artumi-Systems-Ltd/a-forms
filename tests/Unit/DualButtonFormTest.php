@@ -1,22 +1,8 @@
 <?php
 declare(strict_types=1);
 use Tests\TestCase;
-use Artumi\Forms\Form;
+use Tests\Forms\DualButtonForm;
 
-class DualButtonForm extends Form
-{
-    public function __construct(public string $id)
-    {
-        $this->addButton('ok','Submit');
-        $this->addButton('cancel','Cancel');
-
-    }
-
-    public function validators() : array {
-        return [
-        ];
-    }
-}
 
 class DualButtonFormTest extends TestCase
 {

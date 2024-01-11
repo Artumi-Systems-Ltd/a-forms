@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 use Tests\TestCase;
-use Artumi\Forms\Widget\TextArea;
 use Tests\Forms\ValidateTextAreaForm;
 
 class ValidatorTest extends TestCase
