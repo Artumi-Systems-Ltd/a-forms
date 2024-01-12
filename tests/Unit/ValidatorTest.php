@@ -9,8 +9,8 @@ class ValidatorTest extends TestCase
     {
         $form  = new ValidateTextAreaForm('frmValidateTextArea');
         $form->populate(['description'=>'some text','ok'=>'']);
-        $this->assertTrue($form->validate(['description'=>'true']), 'Form is valid');
+        $this->assertTrue($form->validate(), 'Form is valid');
         $form->populate(['description'=>'','ok'=>'']);
-        $this->assertFalse($form->validate(['description'=>'true']), 'Form is invalid');
+        $this->assertFalse($form->validate(), 'Form is invalid');
     }
 }

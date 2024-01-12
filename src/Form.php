@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Artumi\Forms;
 
 use Illuminate\Support\Facades\Validator as FValidator;

@@ -25,6 +25,8 @@ abstract class Widget {
     public
     $value,
     $form,
+    $bRequiredField=false,
+    $sAdditionalValidator='',
     $defaults=[],
     $allowed=[];
 
@@ -34,18 +36,32 @@ abstract class Widget {
         public array $attribs = [] )
     {}
 
-    abstract function html(): string;
+    abstract function html() : string;
     public function set($value){
         $this->value=$value;
+    }
+    public function setRequired(bool $bRequired) : void {
+        $this->bRequiredField=$bRequired;
+    }
+    public function required() : bool
+    {
+        return $this->bRequiredField;
+    }
+    public function requiredIndicator(): string {
+        return '<span class="text-red">(required)</span>';
     }
     public function get(){
         return $this->value;
     }
     public function label() : string {
-        return '<label for="'.$this->id().'">'.$this->caption.'</label>';
-
+        $s='<label for="'.$this->id().'">'.$this->caption;
+        if($this->required()){
+            $s.=$this->requiredIndicator();
+        }
+        $s.='</label>';
+        return $s;
     }
-    public function attribString()
+    public function attribString() : string
     {
         $s='id="'.$this->id().'" name="'.htmlspecialchars($this->name, ENT_QUOTES).'" ';
         foreach(array_merge($this->defaults,$this->attribs) as $k=>$v)
@@ -54,7 +70,7 @@ abstract class Widget {
         }
         return $s;
     }
-    public function setForm(Form $f)
+    public function setForm(Form $f) : void
     {
         $this->form=$f;
     }
@@ -65,5 +81,30 @@ abstract class Widget {
         if($this->form)
             return $this->form->id().'_'.$this->name;
         return $this->name;
+    }
+    /**
+    * validator returns a string that can be parsed by Laravel's
+    * Validation logic  https://laravel.com/docs/10.x/validation#available-validation-rules
+    **/
+    public function validator() : string {
+        $s='';
+        if($this->required())
+        {
+            $s='required';
+            if($this->sAdditionalValidator)
+            {
+                return $s.'|'.$this->sAdditionalValidator;
+            }
+            return $s;
+        }
+        return $this->sAdditionalValidator;
+    }
+    /**
+    * Additional to the "required" validator which we manage
+    * separately. See validator() function
+    **/
+    public function setAdditionalValidator(string $s) : void
+    {
+        $this->sAdditionalValidator=$s;
     }
 }
