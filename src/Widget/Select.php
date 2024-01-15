@@ -21,7 +21,7 @@ class Select extends Widget {
             $s.=$option->html($val);
         }
         $s.='</select>';
-        return $s;
+        return $s.$this->getValMsgHTML();
     }
     public function staticOptions(array $options)
     {

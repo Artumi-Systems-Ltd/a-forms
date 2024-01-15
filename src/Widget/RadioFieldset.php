@@ -24,7 +24,7 @@ class RadioFieldset extends Widget {
         }
         $s.='</div>';
         $s.='</fieldset>';
-        return $s;
+        return $s.$this->getValMsgHTML();
     }
     public function staticOptions(array $options)
     {

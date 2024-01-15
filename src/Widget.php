@@ -31,6 +31,7 @@ abstract class Widget {
     $allowed=[
         "id"
     ];
+    private string $sValidationMsg='';
 
     public function __construct(
         public readonly string $name,
@@ -112,5 +113,20 @@ abstract class Widget {
     public function setAdditionalValidator(string $s) : void
     {
         $this->sAdditionalValidator=$s;
+    }
+
+    public function setValidationMsg(string $sValMsg): void {
+        $this->sValidationMsg=$sValMsg;
+    }
+    public function resetValidation(): void {
+        $this->sValidationMsg='';
+    }
+    public function getValMsgHTML() : string {
+        if(!$this->sValidationMsg)
+        {
+            return '';
+        }
+        return '<div id="'.$this->id().'_v" class="validation">'.$this->sValidationMsg.'</div>';
+
     }
 }

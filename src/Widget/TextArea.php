@@ -32,6 +32,8 @@ class TextArea extends Widget {
 
     public function html() : string {
 
-        return $this->label().'<textarea '.$this->attribString().'>'.htmlspecialchars($this->get(),ENT_QUOTES).'</textarea>';
+        return $this->label()
+            .'<textarea '.$this->attribString().'>'.htmlspecialchars($this->get(),ENT_QUOTES).'</textarea>'
+            .$this->getValMsgHTML();
     }
 }
