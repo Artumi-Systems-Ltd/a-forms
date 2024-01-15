@@ -11,7 +11,7 @@ abstract class Form {
     private string $buttonPressed='';
     private array  $widgets=[];
     private array  $buttons=[];
-    private Validator|null $lastValidator=null;
+    private ?Validator $lastValidator=null;
 
     public function __construct(public string $id){}
 
