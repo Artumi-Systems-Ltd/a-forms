@@ -28,7 +28,9 @@ abstract class Widget {
     $bRequiredField=false,
     $sAdditionalValidator='',
     $defaults=[],
-    $allowed=[];
+    $allowed=[
+        "id"
+    ];
 
     public function __construct(
         public readonly string $name,
@@ -56,7 +58,7 @@ abstract class Widget {
     public function label() : string {
         $s='<label for="'.$this->id().'">'.$this->caption;
         if($this->required()){
-            $s.=$this->requiredIndicator();
+            $s.=' '.$this->requiredIndicator();
         }
         $s.='</label>';
         return $s;
@@ -66,6 +68,10 @@ abstract class Widget {
         $s='id="'.$this->id().'" name="'.htmlspecialchars($this->name, ENT_QUOTES).'" ';
         foreach(array_merge($this->defaults,$this->attribs) as $k=>$v)
         {
+            if($k=="id")
+            {
+                continue;
+            }
             $s.=htmlspecialchars($k, ENT_QUOTES).'="'.htmlspecialchars((string) $v, ENT_QUOTES).'" ';
         }
         return $s;

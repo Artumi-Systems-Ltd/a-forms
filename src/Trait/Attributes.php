@@ -2,6 +2,8 @@
 namespace Artumi\Forms\Trait;
 trait Attributes {
 
+    private $alwaysAllowed = ['id'];
+
     public function attrib(string $name, $default='')
     {
         if(isset($this->attribs[$name]))
@@ -10,7 +12,7 @@ trait Attributes {
     }
     public function setAttribute(string $name, string $value)
     {
-        if(!in_array($name,$this->allowed))
+        if(!in_array($name, $this->alwaysAllowed) && !in_array($name,$this->allowed))
             throw new \InvalidArgumentException("The attrib \"$name\" is not allowed on this type of Widget ");
         $this->attribs[$name]=$value;
 

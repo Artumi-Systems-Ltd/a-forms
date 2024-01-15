@@ -4,5 +4,6 @@
 *.swn
 .phpcd/
 vendor/
+coverage/
 .env
 .phpunit.result.cache

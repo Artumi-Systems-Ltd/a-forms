@@ -25,6 +25,8 @@ class TextAreaFormTest extends TestCase
         $dom->loadHTML($html);
         $textarea = $dom->getElementById('frmTest_description');
         $this->assertEquals($sTestText, $textarea->nodeValue, "Textarea can contain html");
+        $label = $dom->getElementsByTagName('label')[0];
+        $this->assertEquals('Description (required)', $label->nodeValue, "Label has required text");
     }
     public function testInvalidArgument() : void
     {
@@ -45,6 +47,26 @@ class TextAreaFormTest extends TestCase
         $this->assertEquals('</textarea>',$form->description->get(),'</textarea> returned properbly de-escaped');
     }
 
+    public function testIDAttribChange() : void
+    {
+        $form = new TextAreaForm('frmTest');
+        $form->description->setAttribute('id','a-new-id');
+        $sTestText='<textarea rows="20"> test';
+        $form->description=$sTestText;
+        $html= $form->html();
+        $dom = new DomDocument();
+        $dom->loadHTML($html);
+        $textarea = $dom->getElementById('a-new-id');
+        $this->assertEquals($sTestText, $textarea->nodeValue, "Textarea works with new id");
+
+    }
+    public function testAdditionalValidator() : void
+    {
+        $form  = new TextAreaForm('frmTest');
+        $form->description->setRequired(true);
+        $form->description->setAdditionalValidator('max:255');
+        $this->assertEquals('required|max:255',$form->description->validator(),'Validator extended');
+    }
 
     public function testPack(): void
     {
