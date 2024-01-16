@@ -4,6 +4,7 @@ namespace Artumi\Forms;
 
 use Illuminate\Support\Facades\Validator as FValidator;
 use Illuminate\Validation\Validator;
+use InvalidArgumentException;
 
 abstract class Form {
     private string $defaultValidationMsg='There has been an error, please see details below:';
@@ -12,6 +13,8 @@ abstract class Form {
     private array  $widgets=[];
     private array  $buttons=[];
     private ?Validator $lastValidator=null;
+    private string $sAction='';
+    private string $sMethod='post';
 
     public function __construct(public string $id){}
 
@@ -32,7 +35,16 @@ abstract class Form {
     public function html() : string
     {
         $this->updateValidation();
-        $s='<form id="'.htmlspecialchars($this->id,ENT_QUOTES).'">';
+        $s='<form id="'.htmlspecialchars($this->id,ENT_QUOTES).'"';
+        if($this->sAction)
+        {
+            $s.=' action="'.htmlspecialchars($this->sAction, ENT_QUOTES).'"';
+        }
+        if($this->sMethod)
+        {
+            $s.=' method="'.htmlspecialchars($this->sMethod, ENT_QUOTES).'"';
+        }
+        $s.=' >';
         $s.=$this->formValMsgHTML();
         foreach($this->widgets as $widget)
         {
@@ -138,4 +150,19 @@ abstract class Form {
         }
         return '<div id="'.$this->id().'_valmsg" class="validation">'.$this->sValidationMsg.'</div>';
     }
+    public function setAction(string $url) : void {
+        $this->sAction=$url;
+    }
+    public function setMethod(string $method) : void {
+        switch($method) {
+            case 'get':
+            case 'post':
+            case 'dialog':
+                $this->sMethod=$method;
+                break;
+            default:
+            throw new InvalidArgumentException('setMethod only accespts get|post|dialog, but received '.$method);
+        }
+    }
+
 }

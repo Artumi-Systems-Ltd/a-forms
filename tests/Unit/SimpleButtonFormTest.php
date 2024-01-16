@@ -9,7 +9,7 @@ class SimpleButtonFormTest extends TestCase
     {
         $form = new SimpleButtonForm('frmSimpleButton');
         $html = $form->html();
-        $this->assertEquals('<form id="frmSimpleButton"><button name="ok">Submit</button></form>', $html,'Basic form');
+        $this->assertEquals('<form id="frmSimpleButton" method="post" ><button name="ok">Submit</button></form>', $html,'Basic form');
     }
     public function testPopulate(): void
     {

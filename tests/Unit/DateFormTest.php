@@ -4,7 +4,7 @@ namespace Tests ;
 use Tests\TestCase;
 use Tests\Forms\DateForm;
 use DateTime;
-use DomDocument;
+use DOMDocument;
 use Artumi\Forms\Widget\Date;
 
 class DateFormTest extends TestCase
@@ -15,7 +15,7 @@ class DateFormTest extends TestCase
         $form->startdate = new DateTime('today');
         $html = $form->html();
 
-        $dom = new DomDocument();
+        $dom = new DOMDocument();
         $dom->loadHTML($html);
         $startdate = $dom->getElementById('frmDate_startdate');
         $this->assertEquals(date('Y-m-d'), $startdate->getAttribute('value'), 'Date contains start value');
@@ -25,7 +25,6 @@ class DateFormTest extends TestCase
         $form = new DateForm('frmDate');
         $form->populate(['startdate'=>'2024-01-01','ok'=>'']);
         $this->assertEquals('2024-01-01',$form->startdate->get(Date::FORMAT));
-
     }
 
     public function testPack(): void

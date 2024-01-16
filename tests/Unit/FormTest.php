@@ -5,6 +5,7 @@ namespace Tests;
 use Tests\TestCase;
 use Tests\Forms\MasterForm;
 use DomDocument;
+use InvalidArgumentException;
 
 class FormTest extends TestCase
 {
@@ -41,6 +42,57 @@ class FormTest extends TestCase
         $notesValidation = $dom->getElementById('frmMaster_notes_v');
         $this->assertNotNull($notesValidation,'Notes Widget Validation message found');
 
+    }
+    /**
+    * We're checking that the <form action=""> is set correctly
+    **/
+    public function testAction(): void {
+
+        $form = new MasterForm('frmMaster');
+        $form->setAction('/foo');
+        $html = $form->html();
+        $dom = new DOMDocument();
+        $dom->loadHTML($html);
+        $form = $dom->getElementById('frmMaster');
+        $this->assertEquals('/foo', $form->getAttribute('action'),'Action set to /foo');
+        $this->assertEquals('post',$form->getAttribute('method'),'Method set to post');
+    }
+
+    /**
+    * We're checking that the <form method=""> is set correctly
+    **/
+    public function testMethod() : void {
+
+        $form = new MasterForm('frmMaster');
+        $form->setAction('/foo');
+        $form->setMethod('post');
+        $html = $form->html();
+        $dom = new DOMDocument();
+        $dom->loadHTML($html);
+        $formElement = $dom->getElementById('frmMaster');
+        $this->assertEquals('/foo', $formElement->getAttribute('action'),'Action set to /foo');
+        $this->assertEquals('post',$formElement->getAttribute('method'),'Method set to post');
+        $form->setMethod('get');
+        $html = $form->html();
+        $dom->loadHTML($html);
+        $formElement = $dom->getElementById('frmMaster');
+        $this->assertEquals('/foo', $formElement->getAttribute('action'),'Action set to /foo');
+        $this->assertEquals('get',$formElement->getAttribute('method'),'Method set to get');
+
+        $form->setMethod('dialog');
+        $html = $form->html();
+        $dom->loadHTML($html);
+        $formElement = $dom->getElementById('frmMaster');
+        $this->assertEquals('/foo', $formElement->getAttribute('action'),'Action set to /foo');
+        $this->assertEquals('dialog',$formElement->getAttribute('method'),'Method set to dialog');
+    }
+    /**
+     * We're testing that you can't add an invalid method.
+     **/
+    public function testInvalidMethod(): void {
+        $this->expectException(InvalidArgumentException::class);
+        $form = new MasterForm('frmMaster');
+        $form->setMethod('posty');
     }
 
 }
