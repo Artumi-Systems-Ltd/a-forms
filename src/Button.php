@@ -5,7 +5,7 @@ namespace Artumi\Forms;
 class Button {
 
     public function __construct(
-        private string $name,
+        public readonly string $name,
         private string $value)
     {
     }

@@ -2,7 +2,6 @@
 declare(strict_types=1);
 use Tests\TestCase;
 use Tests\Forms\TextAreaForm;
-use InvalidArgumentException;
 
 class TextAreaFormTest extends TestCase
 {

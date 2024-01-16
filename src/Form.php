@@ -4,6 +4,7 @@ namespace Artumi\Forms;
 
 use Illuminate\Support\Facades\Validator as FValidator;
 use Illuminate\Validation\Validator;
+use Illuminate\Http\Request;
 use InvalidArgumentException;
 
 abstract class Form {
@@ -162,6 +163,19 @@ abstract class Form {
                 break;
             default:
             throw new InvalidArgumentException('setMethod only accespts get|post|dialog, but received '.$method);
+        }
+    }
+    public function populateFromRequest(Request $request) : void {
+        foreach($this->widgets as $name=>$widget){
+            if($request->has($name))
+            {
+                $widget->set($request->input($name));
+            }
+        }
+        foreach($this->buttons as $button)
+        {
+            if($request->has($button->name))
+                $this->buttonPressed=$button->name;
         }
     }
 

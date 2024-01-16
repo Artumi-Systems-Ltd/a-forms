@@ -6,6 +6,7 @@ use Tests\TestCase;
 use Tests\Forms\MasterForm;
 use DomDocument;
 use InvalidArgumentException;
+use Illuminate\Http\Request;
 
 class FormTest extends TestCase
 {
@@ -93,6 +94,27 @@ class FormTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $form = new MasterForm('frmMaster');
         $form->setMethod('posty');
+    }
+
+    public function testPopulateFromRequest() : void {
+        $request = Request::create('/some-endpoint','POST', [
+            'name'=>'Richard',
+            'startdate'=>'2023-01-01',
+            'enddate'=>'2024-02-02',
+            'colours'=>'green',
+            'type'=>'old',
+            'notes'=>'Boom',
+            'ok'=>'',
+        ]);
+        $form = new MasterForm('frmMaster');
+        $form->populateFromRequest($request);
+        $this->assertEquals('Richard',$form->name->get(),'Name is richard');
+        $this->assertEquals('2023-01-01',$form->startdate->get(),'Start date is 2023-01-01');
+        $this->assertEquals('2024-02-02',$form->enddate->get(),'End date is 2024-02-02');
+        $this->assertEquals('green',$form->colours->get(),'Colours is green');
+        $this->assertEquals('old',$form->type->get(),'type is old');
+        $this->assertEquals('Boom',$form->notes->get() ,' notes is Boom');
+        $this->assertEquals('ok',$form->buttonPressed(),'OK button was pressed');
     }
 
 }
