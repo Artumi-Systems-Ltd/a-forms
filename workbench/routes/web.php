@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Tests\Forms\MasterForm;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/master-form',function () {
+    $form = new MasterForm('frmMaster');
+    return view('master-form',['form'=>$form]);
 });

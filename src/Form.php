@@ -46,6 +46,7 @@ abstract class Form {
             $s.=' method="'.htmlspecialchars($this->sMethod, ENT_QUOTES).'"';
         }
         $s.=' >';
+        $s.=$this->csrf();
         $s.=$this->formValMsgHTML();
         foreach($this->widgets as $widget)
         {
@@ -177,6 +178,13 @@ abstract class Form {
             if($request->has($button->name))
                 $this->buttonPressed=$button->name;
         }
+    }
+    public function csrf() : string {
+        $t = csrf_token();
+        if($t) {
+            return '<input type="hidden" name="_token" value="'.htmlspecialchars($t, ENT_QUOTES).'">';
+        }
+        return '';
     }
 
 }

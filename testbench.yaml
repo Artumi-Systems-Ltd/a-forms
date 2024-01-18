@@ -1,21 +1,22 @@
+laravel: workbench
+
+
 providers:
   - Workbench\App\Providers\WorkbenchServiceProvider
-
-migrations:
-  - workbench/database/migrations
 
 seeders:
   - Workbench\Database\Seeders\DatabaseSeeder
 
 workbench:
-  start: '/'
+  welcome: true
   install: true
+  start: '/'
   discovers:
     web: true
     api: false
     commands: false
     components: false
-    views: false
+    views: true
   build: []
   assets: []
   sync: []

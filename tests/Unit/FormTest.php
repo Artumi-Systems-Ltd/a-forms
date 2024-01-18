@@ -116,5 +116,9 @@ class FormTest extends TestCase
         $this->assertEquals('Boom',$form->notes->get() ,' notes is Boom');
         $this->assertEquals('ok',$form->buttonPressed(),'OK button was pressed');
     }
-
+    public function testCSRFToken()
+    {
+        $response = $this->get('/master-form');
+        $response->assertStatus(200);
+    }
 }

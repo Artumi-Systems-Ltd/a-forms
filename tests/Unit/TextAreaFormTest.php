@@ -18,7 +18,6 @@ class TextAreaFormTest extends TestCase
 
         $sTestText='<textarea rows="20"> test';
 
-
         $form->description=$sTestText;
         $html= $form->html();
         $dom = new DomDocument();
