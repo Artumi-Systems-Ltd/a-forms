@@ -186,5 +186,23 @@ abstract class Form {
         }
         return '';
     }
-
+    /**
+    * Saves the current data to the session
+    */
+    public function flash() : void {
+        session()->flash('form-'.$this->id(), $this->pack());
+    }
+    /*
+    * Loads the data from the session flash, if there is any.
+    * @return true if something was loaded.
+    **/
+    public function loadFromFlash(): bool {
+        $data = session('form-'.$this->id());
+        if($data)
+        {
+            $this->populate($data);
+            return true;
+        }
+        return false;
+    }
 }

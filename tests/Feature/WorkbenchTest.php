@@ -22,11 +22,15 @@ class WorkbenchTest extends TestCase {
     }
 
     public function testMasterFormInvalidSubmission(): void {
-        //missing most of the data.
+        //missing most of the data, but Jones is passed through
         $response = $this->post('/master-form-submit',['name'=>'Jones']);
         $response->assertStatus(302);
 
         $this->assertEquals('http://localhost/master-form',$response->headers->get('location'),'Redirecting to redisplay form');
+        $response2 = $this->get('/master-form');
+        $dom = new DOMDocument();
+        $dom->loadHTML($response2->getContent());
+        $this->assertEquals('Jones',$dom->getElementById('frmMaster_name')->getAttribute(('value')), "name value was passed through flash");
 
     }
 }

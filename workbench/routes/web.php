@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::get('/master-form',function () {
     $form = new MasterForm('frmMaster');
+    $form->loadFromFlash();
     return view('master-form',['form'=>$form]);
 });
 
@@ -28,6 +29,7 @@ Route::post('/master-form-submit',function (Request $request) {
     $form->populateFromRequest($request);
     if(!$form->validate())
     {
+        $form->flash();
         return redirect('/master-form');
     }
     return redirect('/master-form-success');
