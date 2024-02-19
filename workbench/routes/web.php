@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Tests\Forms\MasterForm;
 /*
@@ -20,4 +21,19 @@ Route::get('/', function () {
 Route::get('/master-form',function () {
     $form = new MasterForm('frmMaster');
     return view('master-form',['form'=>$form]);
+});
+
+Route::post('/master-form-submit',function (Request $request) {
+    $form = new MasterForm('frmMaster');
+    $form->populateFromRequest($request);
+    if(!$form->validate())
+    {
+        return redirect('/master-form');
+    }
+    return redirect('/master-form-success');
+
+});
+
+Route::get('/master-form-success',function () {
+    return view('master-form-success');
 });

@@ -20,4 +20,13 @@ class WorkbenchTest extends TestCase {
         $this->assertEquals('frmMaster',$dom->getElementById('frmMaster')->id,"Form has correct ID");
         $this->assertEquals('frmMaster_notes',$dom->getElementById('frmMaster_notes')->id, "Textarea has correct default ID");
     }
+
+    public function testMasterFormInvalidSubmission(): void {
+        //missing most of the data.
+        $response = $this->post('/master-form-submit',['name'=>'Jones']);
+        $response->assertStatus(302);
+
+        $this->assertEquals('http://localhost/master-form',$response->headers->get('location'),'Redirecting to redisplay form');
+
+    }
 }

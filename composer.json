@@ -1,7 +1,7 @@
 {
     "name": "artumi-systems-ltd/a-forms",
     "description": "Form builder for laravel",
-	"version": "1.0.0",
+    "version": "1.0.0",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -30,8 +30,8 @@
     "require-dev": {
         "orchestra/testbench": "^8.20",
         "phpunit/phpunit": "^10.5",
-		"ext-sqlite3": "*",
-		"ext-pcov": "*"
+        "ext-sqlite3": "*",
+        "ext-pcov": "*"
     },
     "config": {
         "sort-packages": true
@@ -40,6 +40,7 @@
     "prefer-stable": true,
     "scripts": {
         "test": "vendor/bin/phpunit --colors=always  --bootstrap=vendor/autoload.php tests",
+        "test-feature": "vendor/bin/phpunit  --colors=always  --bootstrap=vendor/autoload.php tests/Feature",
         "post-autoload-dump": [
             "@clear",
             "@prepare"
