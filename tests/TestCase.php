@@ -4,6 +4,7 @@ namespace Tests;
 
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Illuminate\Contracts\Config\Repository;
+use function Orchestra\Testbench\workbench_path;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -21,7 +22,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             $config->set('database.default', 'testbench');
             $config->set('database.connections.testbench', [
                 'driver'   => 'sqlite',
-                'database' => ':memory:',
+                'database' => workbench_path('/database/testing-db.sqlite'),
                 'prefix'   => '',
             ]);
 
@@ -31,5 +32,14 @@ class TestCase extends \Orchestra\Testbench\TestCase
                 'queue.failed.database' => 'testbench',
             ]);
         });
+    }
+     /**
+     * Define database migrations.
+     *
+     * @return void
+     */
+    protected function defineDatabaseMigrations()
+    {
+        $this->loadMigrationsFrom(workbench_path('database/migrations'));
     }
 }
