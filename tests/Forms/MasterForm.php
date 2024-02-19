@@ -39,5 +39,9 @@ class MasterForm extends Form
         $textarea->setRequired(true);
         $this->addWidget($textarea);
         $this->addButton('ok','Submit');
+
+
+        $this->setMethod('post');
+        $this->setAction('/master-form-submit');
     }
 }
