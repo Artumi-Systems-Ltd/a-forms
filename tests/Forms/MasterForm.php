@@ -7,6 +7,8 @@ use Artumi\Forms\Widget\Date;
 use Artumi\Forms\Widget\RadioFieldset;
 use Artumi\Forms\Widget\TextArea;
 use Artumi\Forms\Widget\Select;
+use Artumi\Forms\Widget\Email;
+use Artumi\Forms\Widget\PasswordCreate;
 
 
 class MasterForm extends Form
@@ -38,8 +40,17 @@ class MasterForm extends Form
         $textarea= new TextArea('notes','Notes');
         $textarea->setRequired(true);
         $this->addWidget($textarea);
-        $this->addButton('ok','Submit');
 
+        $email = new Email('email','Email');
+        $email->setRequired(true);
+        $this->addWidget($email);
+
+
+        $password = new PasswordCreate('password','New Password');
+        $password->setRequired(true);
+        $this->addWidget($password);
+
+        $this->addButton('ok','Submit');
 
         $this->setMethod('post');
         $this->setAction('/master-form-submit');

@@ -20,7 +20,10 @@ Route::get('/', function () {
 
 Route::get('/master-form',function () {
     $form = new MasterForm('frmMaster');
-    $form->loadFromFlash();
+    if($form->loadFromFlash())
+    {
+        $form->validate(); // so we can see validation errors
+    }
     return view('master-form',['form'=>$form]);
 });
 

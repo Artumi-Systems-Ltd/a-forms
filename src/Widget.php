@@ -64,9 +64,19 @@ abstract class Widget {
         $s.='</label>';
         return $s;
     }
-    public function attribString() : string
+    /**
+     * Produces text of all the attrib=value elements to add to the form element.
+     * @var bool $bIncludeIdAndName = true
+     **/
+    public function attribString(bool $bIncludeIdAndName=true) : string
     {
-        $s='id="'.$this->id().'" name="'.htmlspecialchars($this->name, ENT_QUOTES).'" ';
+        if($bIncludeIdAndName)
+        {
+            $s='id="'.$this->id().'" name="'.htmlspecialchars($this->name, ENT_QUOTES).'" ';
+        }
+        else {
+            $s='';
+        }
         foreach(array_merge($this->defaults,$this->attribs) as $k=>$v)
         {
             if($k=="id")
@@ -93,7 +103,7 @@ abstract class Widget {
     * validator returns a string that can be parsed by Laravel's
     * Validation logic  https://laravel.com/docs/10.x/validation#available-validation-rules
     **/
-    public function validator() : string {
+    public function validator() :string {
         $s='';
         if($this->required())
         {
@@ -105,6 +115,23 @@ abstract class Widget {
             return $s;
         }
         return $this->sAdditionalValidator;
+    }
+    /**
+     * Adds another validator to the current string | separated list
+     * that confirms tothe laravel validator logic
+     **/
+    public function appendValidator(string $sExistingValidator, string $sNewValidator)
+    {
+        if($sExistingValidator)
+        {
+            $sExistingValidator.='|';
+        }
+        else {
+            $sExistingValidator='';
+        }
+        $sExistingValidator.=$sNewValidator;
+        return $sExistingValidator;
+
     }
     /**
     * Additional to the "required" validator which we manage

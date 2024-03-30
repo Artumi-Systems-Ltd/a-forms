@@ -22,3 +22,16 @@ I think older form builders seem to want to do less, and so the
 benefit is less. Maybe I'm wrong.
 
 We're going to give it a go.
+
+# How to test
+
+`composer test`
+
+# How to add a test
+
+In the `workbench` folder is effectively a laravel app which we can
+then use to check that the whole thing works in laravel. So I've got a
+"MasterForm" and we can see it's being rendered properly in the
+`Feature/WorkbenchTest.php` which for now is such a simple controller
+the other moving part is the `workbench/routes/web.php` as opposed to
+a proper controller
