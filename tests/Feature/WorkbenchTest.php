@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Feature;
 use Tests\TestCase;
 use \DOMDocument;
+use Tests\Forms\MasterForm;
 
 class WorkbenchTest extends TestCase {
 
@@ -38,5 +39,30 @@ class WorkbenchTest extends TestCase {
         $this->assertEquals('',$dom->getElementById('frmMaster_password')->getAttribute(('value')), "password value was not passed through flash");
         $this->assertEquals('',$dom->getElementById('frmMaster_password_confirmation')->getAttribute(('value')), "password_confirmation value was not passed through flash");
         $this->assertEquals('The password field confirmation does not match.',$dom->getElementById('frmMaster_password_v')->textContent, "password validation confirmation works");
+    }
+
+    public function testMasterFormValidSubmission(): void {
+        //This should be a valid post, so should redirect to the valid
+        //page
+        $post = [
+            'name'=>'Jones',
+            'password'=>'mypass',
+            'password_confirmation'=>'mypass',
+            'startdate'=>'2020-01-01',
+            'enddate'=>'2025-01-01',
+            'type'=>'new',
+            'colours'=>'red',
+            'email'=>'test@artumi.com',
+            'notes'=>'A note'
+        ];
+
+        $form = new MasterForm('frmTest');
+        $form->populate($post);
+        $packed = $form->pack();
+        $form  = new MasterForm('frmTest');
+        $form->populate($packed);
+        $response = $this->post('/master-form-submit',$post);
+        $response->assertStatus(302);
+        $this->assertEquals('http://localhost/master-form-success',$response->headers->get('location'),'Redirecting to success form');
     }
 }

@@ -24,7 +24,7 @@ class DateFormTest extends TestCase
     {
         $form = new DateForm('frmDate');
         $form->populate(['startdate'=>'2024-01-01','ok'=>'']);
-        $this->assertEquals('2024-01-01',$form->startdate->get(Date::FORMAT));
+        $this->assertEquals('2024-01-01',$form->startdate->get()->format(Date::FORMAT));
     }
 
     public function testPack(): void

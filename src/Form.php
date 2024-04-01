@@ -69,7 +69,7 @@ abstract class Form {
         foreach ($a as $k=>$v)
         {
             if(isset($this->widgets[$k]))
-                $this->widgets[$k]->set($v);
+                $this->widgets[$k]->populate($a);
             else if (isset($this->buttons[$k]))
                 $this->buttonPressed=$k;
         }
@@ -83,7 +83,11 @@ abstract class Form {
         $a=[];
         foreach($this->widgets as $name=>$widget)
         {
-            $a[$name]=$widget->get();
+            $widgetVals= $widget->pack();
+            foreach($widgetVals as $widgetName=>$widgetVal)
+            {
+                $a[$widgetName]=$widgetVal;
+            }
         }
         if($this->buttonPressed)
         {
@@ -167,10 +171,11 @@ abstract class Form {
         }
     }
     public function populateFromRequest(Request $request) : void {
+        $aVals=$request->all();
         foreach($this->widgets as $name=>$widget){
             if($request->has($name))
             {
-                $widget->set($request->input($name));
+                $widget->populate($aVals);
             }
         }
         foreach($this->buttons as $button)

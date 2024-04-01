@@ -156,4 +156,13 @@ abstract class Widget {
         return '<div id="'.$this->id().'_v" class="validation">'.$this->sValidationMsg.'</div>';
 
     }
+    public function pack()
+    {
+        return [$this->name=>$this->get()];
+    }
+    public function populate($a)
+    {
+        if(isset($a[$this->name]))
+            $this->set($a[$this->name]);
+    }
 }
