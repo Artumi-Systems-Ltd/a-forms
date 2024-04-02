@@ -31,6 +31,7 @@ abstract class Widget {
     $allowed=[
         "id"
     ];
+    public $aValidationMsgSubstitute=[];
     private string $sValidationMsg='';
 
     public function __construct(
@@ -144,6 +145,19 @@ abstract class Widget {
 
     public function setValidationMsg(string $sValMsg): void {
         $this->sValidationMsg=$sValMsg;
+    }
+    public function setValidation(array $aErrors): void {
+        $a=[];
+        foreach ($aErrors as $i => $sError) {
+            if(isset($this->aValidationMsgSubstitute[$sError]))
+            {
+                $a[]=$this->aValidationMsgSubstitute[$sError];
+            }
+            else {
+                $a[]=$sError;
+            }
+        }
+        $this->setValidationMsg(implode(' ',$a));
     }
     public function resetValidation(): void {
         $this->sValidationMsg='';

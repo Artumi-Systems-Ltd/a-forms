@@ -128,7 +128,7 @@ abstract class Form {
                 if(count($errors))
                 {
                     $bGotOne=true;
-                    $widget->setValidationMsg(implode('. ', $errors));
+                    $widget->setValidation($errors);
                 }
                 if($bGotOne)
                 {

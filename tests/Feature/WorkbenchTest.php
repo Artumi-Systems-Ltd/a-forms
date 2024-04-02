@@ -38,7 +38,7 @@ class WorkbenchTest extends TestCase {
         $this->assertEquals('Jones',$dom->getElementById('frmMaster_name')->getAttribute(('value')), "name value was passed through flash");
         $this->assertEquals('',$dom->getElementById('frmMaster_password')->getAttribute(('value')), "password value was not passed through flash");
         $this->assertEquals('',$dom->getElementById('frmMaster_password_confirmation')->getAttribute(('value')), "password_confirmation value was not passed through flash");
-        $this->assertEquals('The password field confirmation does not match.',$dom->getElementById('frmMaster_password_v')->textContent, "password validation confirmation works");
+        $this->assertEquals('The password field confirmation does not match. The password field must be at least 8 characters. The password must include at least one uppercase and lowercase letter, one number, and one special character.',$dom->getElementById('frmMaster_password_v')->textContent, "password validation confirmation works");
     }
 
     public function testMasterFormValidSubmission(): void {
@@ -46,8 +46,8 @@ class WorkbenchTest extends TestCase {
         //page
         $post = [
             'name'=>'Jones',
-            'password'=>'mypass',
-            'password_confirmation'=>'mypass',
+            'password'=>'mypaAss$123',
+            'password_confirmation'=>'mypaAss$123',
             'startdate'=>'2020-01-01',
             'enddate'=>'2025-01-01',
             'type'=>'new',

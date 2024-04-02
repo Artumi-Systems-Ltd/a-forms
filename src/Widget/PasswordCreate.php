@@ -6,6 +6,9 @@ use Artumi\Forms\Widget;
 class PasswordCreate extends Widget{
 
     private $sPasswordConfirmation;
+    public  $aValidationMsgSubstitute=[
+        'The password field format is invalid.'=>'The password must include at least one uppercase and lowercase letter, one number, and one special character.'
+    ];
 
     public function html() : string {
         return $this->label()
@@ -19,7 +22,7 @@ class PasswordCreate extends Widget{
 
     public function validator() :string {
         $s=parent::validator();
-        return $this->appendValidator($s, 'confirmed');
+        return $this->appendValidator($s, 'confirmed|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/');
     }
     public function pack()
     {
