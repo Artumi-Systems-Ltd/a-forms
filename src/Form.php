@@ -43,9 +43,21 @@ abstract class Form {
         }
         if($this->sMethod)
         {
-            $s.=' method="'.htmlspecialchars($this->sMethod, ENT_QUOTES).'"';
+            switch($this->sMethod)
+            {
+                case 'get':
+                case 'post':
+                case 'dialog':
+                    $s.=' method="'.$this->sMethod.'"';
+                    break;
+                case 'put':
+                case 'patch':
+                    $s.=' method="post"';
+                    break;
+            }
         }
-        $s.=' >';
+        $s.='>';
+        $s.=$this->formMethodSpoof();
         $s.=$this->csrf();
         $s.=$this->formValMsgHTML();
         foreach($this->widgets as $widget)
@@ -58,6 +70,15 @@ abstract class Form {
         }
         $s.='</form>';
         return $s;
+    }
+    public function formMethodSpoof() : string {
+        switch($this->sMethod)
+        {
+            case 'put':
+            case 'patch':
+            return '<input type="hidden" name="_method" value="'. $this->sMethod.'">';
+        }
+        return '';
     }
     public function __get(string $sName) : Widget {
         return $this->widgets[$sName];
@@ -163,11 +184,13 @@ abstract class Form {
         switch($method) {
             case 'get':
             case 'post':
+            case 'put':
             case 'dialog':
+            case 'patch':
                 $this->sMethod=$method;
                 break;
             default:
-            throw new InvalidArgumentException('setMethod only accespts get|post|dialog, but received '.$method);
+            throw new InvalidArgumentException('setMethod only accespts get|post|put|patch|dialog, but received '.$method);
         }
     }
     public function populateFromRequest(Request $request) : void {

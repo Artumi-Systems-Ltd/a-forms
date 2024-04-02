@@ -26,4 +26,13 @@ class SimpleButtonFormTest extends TestCase
         $this->assertCount(1, $a, "Pack has 1 element");
         $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');
     }
+    public function testPutFormMethod(): void
+    {
+        $form = new SimpleButtonForm('frmSimpleButton');
+        $form->setMethod('put');
+
+        $html = $form->html();
+        $this->assertEquals('<form id="frmSimpleButton" method="post" ><input type="hidden" name="_method" value="put"><button name="ok">Submit</button></form>', $html,'Basic form');
+
+    }
 }
