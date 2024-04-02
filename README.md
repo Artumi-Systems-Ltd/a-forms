@@ -35,3 +35,8 @@ then use to check that the whole thing works in laravel. So I've got a
 `Feature/WorkbenchTest.php` which for now is such a simple controller
 the other moving part is the `workbench/routes/web.php` as opposed to
 a proper controller
+
+# Errors
+
+In errors which use the "workbench" laravel testing application, the
+errors produced appear in `workbench/storage/logs/laravel.log`
