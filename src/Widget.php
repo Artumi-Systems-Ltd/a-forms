@@ -24,6 +24,7 @@ abstract class Widget {
 
     public
     $value,
+    $initialValue,
     $form,
     $bRequiredField=false,
     $sAdditionalValidator='',
@@ -43,6 +44,9 @@ abstract class Widget {
     abstract function html() : string;
     public function set($value){
         $this->value=$value;
+    }
+    public function setInitialValue($value) {
+        $this->initialValue=$value;
     }
     public function setRequired(bool $bRequired) : void {
         $this->bRequiredField=$bRequired;
@@ -178,5 +182,18 @@ abstract class Widget {
     {
         if(isset($a[$this->name]))
             $this->set($a[$this->name]);
+    }
+
+    public function initialPopulate($a)
+    {
+        $this->populate($a);
+
+        if(isset($a[$this->name]))
+            $this->setInitialValue($a[$this->name]);
+    }
+
+    public function changed()
+    {
+        return $this->value!==$this->initialValue;
     }
 }

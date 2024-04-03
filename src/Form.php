@@ -86,6 +86,15 @@ abstract class Form {
     public function __set(string $sName, $value) : void {
         $this->widgets[$sName]->set($value);
     }
+    public function initialPopulate(array $a): void {
+
+        foreach ($a as $k=>$v)
+        {
+            if(isset($this->widgets[$k]))
+                $this->widgets[$k]->initialPopulate($a);
+            //no buttons can be pressed on an initial populate
+        }
+    }
     public function populate(array $a) : void {
         foreach ($a as $k=>$v)
         {
@@ -94,7 +103,6 @@ abstract class Form {
             else if (isset($this->buttons[$k]))
                 $this->buttonPressed=$k;
         }
-
     }
     public function buttonPressed() : string
     {
@@ -116,6 +124,22 @@ abstract class Form {
         }
         return $a;
     }
+    public function packChanged() : array {
+
+        $a=[];
+        foreach($this->widgets as $name=>$widget)
+        {
+            if($widget->changed())
+            {
+                $widgetVals= $widget->pack();
+                foreach($widgetVals as $widgetName=>$widgetVal)
+                {
+                    $a[$widgetName]=$widgetVal;
+                }
+            }
+        }
+        return $a;
+    }
     public function validators() : array
     {
         $a=[];
@@ -134,6 +158,9 @@ abstract class Form {
         $validator = FValidator::make($this->pack(), $this->validators());
         $this->lastValidator=$validator;
         return $validator->passes();
+    }
+    public function lastValidator(){
+        return $this->lastValidator;
     }
     /** Passes validation information collected during a validate()
     *   call to widgets

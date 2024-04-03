@@ -21,20 +21,35 @@ class PasswordCreate extends Widget{
     }
 
     public function validator() :string {
+        //if not changed, then it's valid, unless it's empty and
+        //required
+        if(!$this->changed())
+        {
+            if($this->get() || !$this->required())
+            {
+                return ''; //no validators
+            }
+        }
         $s=parent::validator();
         return $this->appendValidator($s, 'confirmed|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/');
     }
     public function pack()
     {
-        return [$this->name=>$this->get(),
-            $this->name.'_confirmation'=>$this->sPasswordConfirmation];
-
+        if($this->changed())
+        {
+            return [$this->name=>$this->get(),
+                $this->name.'_confirmation'=>$this->sPasswordConfirmation];
+        }
+        else {
+            return [];
+        }
     }
     public function populate($aVals)
     {
         if(isset($aVals[$this->name]))
         {
-            $this->set($aVals[$this->name]);
+            if($aVals[$this->name])
+                $this->set($aVals[$this->name]);
         }
         if(isset($aVals[$this->name.'_confirmation']))
         {
