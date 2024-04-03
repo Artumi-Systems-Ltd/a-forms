@@ -52,6 +52,7 @@ abstract class Form {
                     break;
                 case 'put':
                 case 'patch':
+                case 'delete':
                     $s.=' method="post"';
                     break;
             }
@@ -75,6 +76,7 @@ abstract class Form {
         switch($this->sMethod)
         {
             case 'put':
+            case 'delete':
             case 'patch':
             return '<input type="hidden" name="_method" value="'. $this->sMethod.'">';
         }
@@ -212,6 +214,7 @@ abstract class Form {
             case 'get':
             case 'post':
             case 'put':
+            case 'delete':
             case 'dialog':
             case 'patch':
                 $this->sMethod=$method;
