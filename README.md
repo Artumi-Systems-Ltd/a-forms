@@ -40,3 +40,15 @@ a proper controller
 
 In errors which use the "workbench" laravel testing application, the
 errors produced appear in `workbench/storage/logs/laravel.log`
+
+
+# Creating a Widget
+
+- Make sure you add a `public $allowed` property which contains the
+attributes that can be set.
+- Make sure you create a test that covers when the widget is not valid
+  and when it is, and when it has been changed. Mostly the default
+  implementation will work, one that doesn't is the PasswordCreate
+  widget because an empty response means "not changed" whereas,
+  normally, an empty response would mean someone has emptied the
+  field.
