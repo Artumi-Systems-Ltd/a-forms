@@ -28,7 +28,6 @@ abstract class Widget {
     $form,
     $bRequiredField=false,
     $sAdditionalValidator='',
-    $defaults=[],
     $allowed=[
         "id"
     ];
@@ -38,8 +37,10 @@ abstract class Widget {
     public function __construct(
         public readonly string $name,
         public readonly string $caption,
-        public array $attribs = [] )
-    {}
+        public array $initialAttribs = [] )
+    {
+        $this->attribs=$this->initialAttribs;
+    }
 
     abstract function html() : string;
     public function set($value){
@@ -67,29 +68,6 @@ abstract class Widget {
             $s.=' '.$this->requiredIndicator();
         }
         $s.='</label>';
-        return $s;
-    }
-    /**
-     * Produces text of all the attrib=value elements to add to the form element.
-     * @var bool $bIncludeIdAndName = true
-     **/
-    public function attribString(bool $bIncludeIdAndName=true) : string
-    {
-        if($bIncludeIdAndName)
-        {
-            $s='id="'.$this->id().'" name="'.htmlspecialchars($this->name, ENT_QUOTES).'" ';
-        }
-        else {
-            $s='';
-        }
-        foreach(array_merge($this->defaults,$this->attribs) as $k=>$v)
-        {
-            if($k=="id")
-            {
-                continue;
-            }
-            $s.=htmlspecialchars($k, ENT_QUOTES).'="'.htmlspecialchars((string) $v, ENT_QUOTES).'" ';
-        }
         return $s;
     }
     public function setForm(Form $f) : void

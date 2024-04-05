@@ -122,4 +122,22 @@ class FormTest extends TestCase
         $response = $this->get('/master-form');
         $response->assertStatus(200);
     }
+
+    public function testFormClassSet()
+    {
+
+        $form = new MasterForm('frmMaster');
+
+        $class='this-is-a-class';
+        $style="color:red";
+        $form->setAttribute('class',$class);
+        $form->setAttribute('style',$style);
+        $html = $form->html();
+        $dom = new DomDocument();
+        $dom->loadHTML($html);
+        $formElement = $dom->getElementById('frmMaster');
+
+        $this->assertEquals($class, $formElement->getAttribute('class'),'Form class is set ');
+        $this->assertEquals($style, $formElement->getAttribute('style'),'Form style is set ');
+    }
 }

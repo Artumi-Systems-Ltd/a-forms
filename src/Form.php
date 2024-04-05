@@ -5,9 +5,12 @@ namespace Artumi\Forms;
 use Illuminate\Support\Facades\Validator as FValidator;
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
+use Artumi\Forms\Trait\Attributes;
 use InvalidArgumentException;
 
 abstract class Form {
+    use Attributes;
+
     private string $defaultValidationMsg='There has been an error, please see details below:';
     private string $sValidationMsg='';
     private string $buttonPressed='';
@@ -17,7 +20,17 @@ abstract class Form {
     private string $sAction='';
     private string $sMethod='post';
 
-    public function __construct(public string $id){}
+
+    public $allowed=[
+        'class',
+        'style',
+    ];
+
+    public function __construct(public string $id,
+        public array $initialAttribs){
+        $this->attribs=$this->initialAttribs;
+
+    }
 
     public function id() : string {
         return $this->id;
@@ -37,6 +50,9 @@ abstract class Form {
     {
         $this->updateValidation();
         $s='<form id="'.htmlspecialchars($this->id,ENT_QUOTES).'"';
+        $attribs = $this->attribString(false);
+        if($attribs)
+        $s.=' '.$attribs;
         if($this->sAction)
         {
             $s.=' action="'.htmlspecialchars($this->sAction, ENT_QUOTES).'"';
