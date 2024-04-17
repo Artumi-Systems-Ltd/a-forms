@@ -45,6 +45,28 @@ abstract class Form {
         $widget->setForm($this);
         $this->widgets[$widget->name]=$widget;
     }
+    public function removeWidget(Widget|string $widget) : bool {
+        if(is_object($widget))
+        {
+            $name=$widget->name;
+        }
+        else {
+            $name=$widget;
+        }
+        if($this->hasWidget($name))
+        {
+            unset($this->widgets[$name]);
+            return true;
+        }
+        return false;
+    }
+    public function hasWidget(string $name)
+    {
+        return isset($this->widgets[$name]);
+    }
+    public function getWidget(string $name) : Widget {
+        return $this->widgets[$name];
+    }
 
     public function html() : string
     {

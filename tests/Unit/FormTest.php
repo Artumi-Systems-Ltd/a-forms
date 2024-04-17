@@ -11,7 +11,16 @@ use Artumi\Forms\Widget\Date;
 
 class FormTest extends TestCase
 {
+    public function testBasicFunctions() : void
+    {
+        $form = new MasterForm('frmTest');
+        $date = new Date('newstart','Start');
+        $form->addWidget($date);
+        $this->assertTrue($form->hasWidget('newstart'),'Widget was added');
+        $form->removeWidget($date);
+        $this->assertFalse($form->hasWidget('newstart'),'Widget was removed');
 
+    }
     public function testInvalidFormMessages() : void
     {
         $form = new MasterForm('frmMaster');
