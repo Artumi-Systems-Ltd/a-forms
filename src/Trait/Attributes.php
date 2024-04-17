@@ -2,7 +2,7 @@
 namespace Artumi\Forms\Trait;
 trait Attributes {
 
-    private $alwaysAllowed = ['id'];
+    private $alwaysAllowed = ['id','class','style'];
     public $defaults=[];
     public $attribs = [];
 

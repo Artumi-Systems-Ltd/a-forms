@@ -16,14 +16,14 @@ class SelectFormTest extends TestCase
     public function testPopulate() : void
     {
         $form = new SelectForm('frmSelect');
-        $form->populate(['colour'=>'green']);
+        $form->populateFromArray(['colour'=>'green']);
         $this->assertEquals('green',$form->colour->get(),'Colour is green');
     }
 
     public function testPack(): void
     {
         $form = new SelectForm('frmSelect');
-        $form->populate(['colour'=>'green','ok'=>'']);
+        $form->populateFromArray(['colour'=>'green','ok'=>'']);
         $a = $form->pack();
         $this->assertCount(2, $a, "Pack has 2 elements");
         $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');

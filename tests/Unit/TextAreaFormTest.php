@@ -42,7 +42,7 @@ class TextAreaFormTest extends TestCase
     public function testPopulate() : void
     {
         $form = new TextAreaForm('frmTest');
-        $form->populate(['description'=>'</textarea>','ok'=>'']);
+        $form->populateFromArray(['description'=>'</textarea>','ok'=>'']);
         $this->assertEquals('</textarea>',$form->description->get(),'</textarea> returned properbly de-escaped');
     }
 
@@ -70,7 +70,7 @@ class TextAreaFormTest extends TestCase
     public function testPack(): void
     {
         $form = new TextAreaForm('frmTest');
-        $form->populate(['description'=>'</textarea>','ok'=>'']);
+        $form->populateFromArray(['description'=>'</textarea>','ok'=>'']);
         $a = $form->pack();
         $this->assertCount(2, $a, "Pack has 2 elements");
         $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');

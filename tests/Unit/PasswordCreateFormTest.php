@@ -24,12 +24,12 @@ class PasswordCreateFormTest extends TestCase
         $this->assertEquals("", $passWidget->getAttribute('value'),'Password widget has no value');
 
         $post = ['password'=>'']; // The user has not entered a new password.
-        $form->populate($post);
+        $form->populateFromArray($post);
 
         $this->assertFalse($form->password->changed(), 'The password has not been changed');
         $this->assertFalse($form->validate(),'The form is invalid');
         $post = ['password'=>'password']; // invalid password !
-        $form->populate($post);
+        $form->populateFromArray($post);
         $this->assertTrue($form->password->changed(), 'The password has been changed');
         $this->assertFalse($form->validate(),'The form is not valid');
         $this->assertFalse($form->validate(),'The form is still not valid');
@@ -42,7 +42,7 @@ class PasswordCreateFormTest extends TestCase
         $this->assertEquals("", $passWidget->getAttribute('value'),'Password widget still has no value');
 
         $post=['password'=>'MyGoodPass123$','password_confirmation'=>'MyGoodPass123$'];
-        $form->populate($post);
+        $form->populateFromArray($post);
         $this->assertTrue($form->password->changed(), 'The password has been changed');
         $this->assertTrue($form->validate(),'The form is valid');
         $this->assertTrue($form->validate(),'The form is still valid');

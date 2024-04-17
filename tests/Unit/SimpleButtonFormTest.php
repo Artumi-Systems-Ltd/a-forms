@@ -14,14 +14,14 @@ class SimpleButtonFormTest extends TestCase
     public function testPopulate(): void
     {
         $form = new SimpleButtonForm('frmSimpleButton');
-        $form->populate(['ok'=>'']);
+        $form->populateFromArray(['ok'=>'']);
         $this->assertEquals('ok',$form->buttonPressed(),'OK was pressed');
 
     }
     public function testPack(): void
     {
         $form = new SimpleButtonForm('frmSimpleButton');
-        $form->populate(['ok'=>'']);
+        $form->populateFromArray(['ok'=>'']);
         $a = $form->pack();
         $this->assertCount(1, $a, "Pack has 1 element");
         $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');

@@ -156,7 +156,12 @@ abstract class Widget {
     {
         return [$this->name=>$this->get()];
     }
-    public function populate($a)
+    public function populateFromTransaction($a)
+    {
+        if(isset($a[$this->name]))
+            $this->set($a[$this->name]);
+    }
+    public function populateFromArray($a)
     {
         if(isset($a[$this->name]))
             $this->set($a[$this->name]);
@@ -164,7 +169,7 @@ abstract class Widget {
 
     public function initialPopulate($a)
     {
-        $this->populate($a);
+        $this->populateFromArray($a);
 
         if(isset($a[$this->name]))
             $this->setInitialValue($a[$this->name]);

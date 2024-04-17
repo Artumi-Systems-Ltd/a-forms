@@ -30,14 +30,14 @@ class RadioFieldsetFormTest extends TestCase
     public function testPopulate() : void
     {
         $form = new RadioFieldsetForm('frmRadio');
-        $form->populate(['type'=>'archive']);
+        $form->populateFromArray(['type'=>'archive']);
         $this->assertEquals('archive',$form->type->get(),'Radio set to archive');
     }
 
     public function testPack(): void
     {
         $form = new RadioFieldsetForm('frmRadio');
-        $form->populate(['type'=>'archive','ok'=>'']);
+        $form->populateFromArray(['type'=>'archive','ok'=>'']);
         $a = $form->pack();
         $this->assertCount(2, $a, "Pack has 2 elements");
         $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');

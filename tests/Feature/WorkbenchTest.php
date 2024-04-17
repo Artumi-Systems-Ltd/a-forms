@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace Tests\Feature;
+use Illuminate\Http\Request;
 use Tests\TestCase;
 use \DOMDocument;
 use Tests\Forms\MasterForm;
@@ -57,10 +58,22 @@ class WorkbenchTest extends TestCase {
         ];
 
         $form = new MasterForm('frmTest');
-        $form->populate($post);
+        $form->populateFromArray($post);
+        $this->assertTrue($form->validate(),'Post is valid');
+
+        $request = new Request($post);
+        $form = new MasterForm('frmTest');
+        $form->populateFromRequest($request);
+
+        $valid= $form->validate();
+
+        $this->assertTrue($form->validate(),'Post is valid');
+
         $packed = $form->pack();
         $form  = new MasterForm('frmTest');
-        $form->populate($packed);
+        $form->populateFromArray($packed);
+        //We're checking the post is valid, but I want to see it working through
+        //HTTP posting as well
         $response = $this->post('/master-form-submit',$post);
         $response->assertStatus(302);
         $this->assertEquals('http://localhost/master-form-success',$response->headers->get('location'),'Redirecting to success form');

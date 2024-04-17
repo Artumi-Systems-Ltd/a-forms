@@ -113,11 +113,11 @@ abstract class Form {
             //no buttons can be pressed on an initial populate
         }
     }
-    public function populate(array $a) : void {
+    public function populateFromArray(array $a) : void {
         foreach ($a as $k=>$v)
         {
             if(isset($this->widgets[$k]))
-                $this->widgets[$k]->populate($a);
+                $this->widgets[$k]->populateFromArray($a);
             else if (isset($this->buttons[$k]))
                 $this->buttonPressed=$k;
         }
@@ -241,15 +241,17 @@ abstract class Form {
     }
     public function populateFromRequest(Request $request) : void {
         $aVals=$request->all();
-        foreach($this->widgets as $name=>$widget){
-            if($request->has($name))
-            {
-                $widget->populate($aVals);
-            }
+        $this->populateFromTransaction($aVals);
+    }
+    public function populateFromTransaction($aVals)
+    {
+        foreach ($this->widgets as $name=>$widget)
+        {
+            $widget->populateFromTransaction($aVals);
         }
         foreach($this->buttons as $button)
         {
-            if($request->has($button->name))
+            if(isset($aVals[$button->name]))
                 $this->buttonPressed=$button->name;
         }
     }
@@ -274,7 +276,7 @@ abstract class Form {
         $data = session('form-'.$this->id());
         if($data)
         {
-            $this->populate($data);
+            $this->populateFromArray($data);
             return true;
         }
         return false;

@@ -23,14 +23,14 @@ class DateFormTest extends TestCase
     public function testPopulate() : void
     {
         $form = new DateForm('frmDate');
-        $form->populate(['startdate'=>'2024-01-01','ok'=>'']);
+        $form->populateFromArray(['startdate'=>'2024-01-01','ok'=>'']);
         $this->assertEquals('2024-01-01',$form->startdate->get()->format(Date::FORMAT));
     }
 
     public function testPack(): void
     {
         $form = new DateForm('frmSimpleButton');
-        $form->populate(['startdate'=>'2024-01-01','ok'=>'']);
+        $form->populateFromArray(['startdate'=>'2024-01-01','ok'=>'']);
         $a = $form->pack();
         $this->assertCount(2, $a, "Pack has 2 elements");
         $this->assertTrue(isset($a['ok']),'There is an element with "ok" as the key');

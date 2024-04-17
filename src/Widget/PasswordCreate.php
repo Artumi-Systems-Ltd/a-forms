@@ -44,7 +44,7 @@ class PasswordCreate extends Widget{
             return [];
         }
     }
-    public function populate($aVals)
+    public function populateFromTransaction($aVals)
     {
         if(isset($aVals[$this->name]))
         {
@@ -55,5 +55,9 @@ class PasswordCreate extends Widget{
         {
             $this->sPasswordConfirmation=$aVals[$this->name.'_confirmation'];
         }
+    }
+    public function populateFromArray($aVals)
+    {
+        return $this->populateFromTransaction($aVals);
     }
 }
