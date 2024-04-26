@@ -14,15 +14,16 @@ class RadioFieldset extends Widget {
         }
     }
     public function html() : string {
-        $s='<fieldset>';
-        $s.='<legend>'.htmlspecialchars($this->caption,ENT_QUOTES).'</legend>';
-        $s.='<div>';
+        $s= $this->label();
+        $s.='<fieldset class="radiofieldset">';
+        $s.='<legend>Please choose one:</legend>';
         $val = $this->get();
         foreach($this->options() as $option)
         {
+            $s.='<div>';
             $s.=$option->html($val);
+            $s.='</div>';
         }
-        $s.='</div>';
         $s.='</fieldset>';
         return $s.$this->getValMsgHTML();
     }
