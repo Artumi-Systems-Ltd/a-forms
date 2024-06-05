@@ -161,10 +161,19 @@ abstract class Widget {
         if(isset($a[$this->name]))
             $this->set($a[$this->name]);
     }
-    public function populateFromArray($a)
+
+    /**
+     * This function uses an array and by default the widget will look
+     * for a value with a key that matches the name. However it
+     * doesn't have to. For example, a widget that uses a latitude and
+     * longitude could check 2 keys. This allows us to have a widget
+     * that can manage a number of columns in a table.
+     * @param $aRow array This represents a table row, a whole record.
+    **/
+    public function populateFromArray($aRow)
     {
-        if(isset($a[$this->name]))
-            $this->set($a[$this->name]);
+        if(isset($aRow[$this->name]))
+            $this->set($aRow[$this->name]);
     }
 
     public function initialPopulate($a)
