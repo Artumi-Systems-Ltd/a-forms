@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Artumi\Forms;
+namespace ArtumiSystemsLtd\AForms;
 
-use Artumi\Forms\Form;
-use Artumi\Forms\Trait\Attributes;
+use ArtumiSystemsLtd\AForms\Form;
+use ArtumiSystemsLtd\AForms\Trait\Attributes;
 use InvalidArgumentException;
 
 
 /**
-* Represents a "Widget" for use in Forms. A simple widget would
+* Represents a "Widget" for use in AForms. A simple widget would
 * correspond to something like an <input> with it's <label> and
 * perhaps some validation messages also, if the form was being
 * redisplayed after an error. But actually these widgets should be

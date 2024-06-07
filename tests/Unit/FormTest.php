@@ -7,7 +7,7 @@ use Tests\Forms\MasterForm;
 use DomDocument;
 use InvalidArgumentException;
 use Illuminate\Http\Request;
-use Artumi\Forms\Widget\Date;
+use ArtumiSystemsLtd\AForms\Widget\Date;
 
 class FormTest extends TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 namespace Tests\Forms;
-use Artumi\Forms\Form;
-use Artumi\Forms\Widget\Checkbox;
+use ArtumiSystemsLtd\AForms\Form;
+use ArtumiSystemsLtd\AForms\Widget\Checkbox;
 
 class CheckboxForm extends Form
 {

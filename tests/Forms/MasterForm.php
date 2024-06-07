@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 namespace Tests\Forms;
-use Artumi\Forms\Form;
-use Artumi\Forms\Widget\Text;
-use Artumi\Forms\Widget\Date;
-use Artumi\Forms\Widget\RadioFieldset;
-use Artumi\Forms\Widget\TextArea;
-use Artumi\Forms\Widget\Select;
-use Artumi\Forms\Widget\Email;
-use Artumi\Forms\Widget\PasswordCreate;
+use ArtumiSystemsLtd\AForms\Form;
+use ArtumiSystemsLtd\AForms\Widget\Text;
+use ArtumiSystemsLtd\AForms\Widget\Date;
+use ArtumiSystemsLtd\AForms\Widget\RadioFieldset;
+use ArtumiSystemsLtd\AForms\Widget\TextArea;
+use ArtumiSystemsLtd\AForms\Widget\Select;
+use ArtumiSystemsLtd\AForms\Widget\Email;
+use ArtumiSystemsLtd\AForms\Widget\PasswordCreate;
 
 
 class MasterForm extends Form

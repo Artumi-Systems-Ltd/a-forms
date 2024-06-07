@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 use Tests\TestCase;
-use Artumi\Forms\Widget\TextArea;
+use ArtumiSystemsLtd\AForms\Widget\TextArea;
 
 class WidgetTest extends TestCase
 {

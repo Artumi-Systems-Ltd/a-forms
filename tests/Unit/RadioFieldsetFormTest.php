@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 use Tests\TestCase;
-use Artumi\Forms\Widget\RadioFieldset;
+use ArtumiSystemsLtd\AForms\Widget\RadioFieldset;
 use Tests\Forms\RadioFieldsetForm;
 
 class RadioFieldsetFormTest extends TestCase

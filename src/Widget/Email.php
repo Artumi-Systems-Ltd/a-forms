@@ -1,7 +1,7 @@
 <?php
 
-namespace Artumi\Forms\Widget;
-use Artumi\Forms\Widget;
+namespace ArtumiSystemsLtd\AForms\Widget;
+use ArtumiSystemsLtd\AForms\Widget;
 
 class Email extends Widget{
 

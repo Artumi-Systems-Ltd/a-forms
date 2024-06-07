@@ -1,7 +1,7 @@
 <?php
 
-namespace Artumi\Forms;
-use Artumi\Forms\Widget\RadioFieldset;
+namespace ArtumiSystemsLtd\AForms;
+use ArtumiSystemsLtd\AForms\Widget\RadioFieldset;
 
 class Radio {
     public function __construct(

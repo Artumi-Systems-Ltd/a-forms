@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace Tests\Forms;
-use Artumi\Forms\Form;
+use ArtumiSystemsLtd\AForms\Form;
 
 class SimpleButtonForm extends Form
 {

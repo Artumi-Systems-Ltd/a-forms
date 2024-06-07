@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Artumi\\Forms\\": "src/"
+            "ArtumiSystemsLtd\\AForms\\": "src/"
         }
     },
     "autoload-dev": {

@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 namespace Tests\Forms;
-use Artumi\Forms\Form;
-use Artumi\Forms\Widget\TextArea;
+use ArtumiSystemsLtd\AForms\Form;
+use ArtumiSystemsLtd\AForms\Widget\TextArea;
 
 class ValidateTextAreaForm extends Form
 {

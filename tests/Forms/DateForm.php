@@ -2,8 +2,8 @@
 declare(strict_types=1);
 namespace Tests\Forms ;
 
-use Artumi\Forms\Form;
-use Artumi\Forms\Widget\Date;
+use ArtumiSystemsLtd\AForms\Form;
+use ArtumiSystemsLtd\AForms\Widget\Date;
 
 class DateForm extends Form
 {

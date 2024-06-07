@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Artumi\Forms\Widget\Text;
+use ArtumiSystemsLtd\AForms\Widget\Text;
 
 class TextWidgetTest extends TestCase
 {

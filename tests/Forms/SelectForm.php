@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 namespace Tests\Forms;
-use Artumi\Forms\Form;
-use Artumi\Forms\Widget\Select;
+use ArtumiSystemsLtd\AForms\Form;
+use ArtumiSystemsLtd\AForms\Widget\Select;
 
 class SelectForm extends Form
 {

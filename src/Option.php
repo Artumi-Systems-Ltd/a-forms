@@ -1,6 +1,6 @@
 <?php
 
-namespace Artumi\Forms;
+namespace ArtumiSystemsLtd\AForms;
 class Option {
     public function __construct(
         public string $value,

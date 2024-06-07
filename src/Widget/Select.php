@@ -1,8 +1,8 @@
 <?php
 
-namespace Artumi\Forms\Widget;
-use Artumi\Forms\Widget;
-use Artumi\Forms\Option;
+namespace ArtumiSystemsLtd\AForms\Widget;
+use ArtumiSystemsLtd\AForms\Widget;
+use ArtumiSystemsLtd\AForms\Option;
 
 class Select extends Widget {
     public $options;

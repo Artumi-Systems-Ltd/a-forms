@@ -1,5 +1,5 @@
 <?php
-namespace Artumi\Forms\Trait;
+namespace ArtumiSystemsLtd\AForms\Trait;
 trait Attributes {
 
     private $alwaysAllowed = ['id','class','style'];

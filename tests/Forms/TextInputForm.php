@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 namespace Tests\Forms;
-use Artumi\Forms\Form;
-use Artumi\Forms\Widget\Text;
+use ArtumiSystemsLtd\AForms\Form;
+use ArtumiSystemsLtd\AForms\Widget\Text;
 
 class TextInputForm extends Form
 {

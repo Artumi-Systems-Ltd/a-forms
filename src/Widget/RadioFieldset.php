@@ -1,8 +1,8 @@
 <?php
 
-namespace Artumi\Forms\Widget;
-use Artumi\Forms\Widget;
-use Artumi\Forms\Radio;
+namespace ArtumiSystemsLtd\AForms\Widget;
+use ArtumiSystemsLtd\AForms\Widget;
+use ArtumiSystemsLtd\AForms\Radio;
 
 class RadioFieldset extends Widget {
     public $options;

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
-namespace Artumi\Forms;
+namespace ArtumiSystemsLtd\AForms;
 
 use Illuminate\Support\Facades\Validator as FValidator;
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
-use Artumi\Forms\Trait\Attributes;
+use ArtumiSystemsLtd\AForms\Trait\Attributes;
 use InvalidArgumentException;
 
 abstract class Form {

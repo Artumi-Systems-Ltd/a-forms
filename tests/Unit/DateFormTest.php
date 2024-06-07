@@ -5,7 +5,7 @@ use Tests\TestCase;
 use Tests\Forms\DateForm;
 use DateTime;
 use DOMDocument;
-use Artumi\Forms\Widget\Date;
+use ArtumiSystemsLtd\AForms\Widget\Date;
 
 class DateFormTest extends TestCase
 {

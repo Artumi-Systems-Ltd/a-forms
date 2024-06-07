@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 namespace Tests\Forms;
-use Artumi\Forms\Form;
+use ArtumiSystemsLtd\AForms\Form;
 
-use Artumi\Forms\Widget\RadioFieldset;
+use ArtumiSystemsLtd\AForms\Widget\RadioFieldset;
 
 class RadioFieldsetForm extends Form
 {
