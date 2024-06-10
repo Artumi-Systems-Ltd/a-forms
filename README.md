@@ -51,4 +51,24 @@ attributes that can be set.
   implementation will work, one that doesn't is the PasswordCreate
   widget because an empty response means "not changed" whereas,
   normally, an empty response would mean someone has emptied the
-  field.
+field.
+
+# Static assets
+
+Any plugins that want to add static assets to a artisan vendor:publish can use
+the tag in their service provider of 'aform-widgets'.
+
+# Getting the assets into your template.
+
+The first job is to have the page-asset-manager instantiated and then pass it to `registerAssets()`
+which will then do the work of asking the widgets that have been added to the
+form to register their requires assets.
+
+You'll want the instantiated class to be a singleton. Then that singleton would be given
+to your template to ask it to output the references to the assets in the html.
+
+
+This package uses artumi-systems-ltd/page-asset-manager for this job, and you should refer
+to this:
+
+https://github.com/Artumi-Systems-Ltd/page-asset-manager

@@ -25,13 +25,13 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": ">=10.0",
-        "artumi-systems-ltd/page-asset-manager": "dev-main"
+        "artumi-systems-ltd/page-asset-manager": "0.1"
     },
 	"repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Artumi-Systems-Ltd/page-asset-manager"
-        }
+		{
+			"type": "composer",
+			"url": "https://composer.artumi.com/packages.json"
+		}
 	],
     "require-dev": {
         "orchestra/testbench": "^8.20",

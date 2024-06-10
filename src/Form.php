@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace ArtumiSystemsLtd\AForms;
 
+use \ArtumiSystemsLtd\AForms\Trait\Attributes;
+use ArtumiSystemsLtd\PageAssetManager\PageAssetManager;
 use Illuminate\Support\Facades\Validator as FValidator;
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
-use \ArtumiSystemsLtd\AForms\Trait\Attributes;
 use InvalidArgumentException;
 
 abstract class Form
@@ -298,5 +299,12 @@ abstract class Form
             return true;
         }
         return false;
+    }
+
+    public function registerAssets(PageAssetManager $manager): void
+    {
+        foreach ($this->widgets as $widget) {
+            $widget->registerAssets($manager);
+        }
     }
 }
