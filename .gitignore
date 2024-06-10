@@ -9,3 +9,4 @@ workbench/database/testing-db.sqlite
 .env
 .phpunit.result.cache
 .phpactor.json
+composer.lock
