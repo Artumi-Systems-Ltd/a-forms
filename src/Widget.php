@@ -42,6 +42,12 @@ abstract class Widget
         public array $initialAttribs = []
     ) {
         $this->attribs = $this->initialAttribs;
+        $this->init();
+    }
+
+    public function init()
+    {
+        //to override
     }
 
     abstract function html(): string;
@@ -193,6 +199,15 @@ abstract class Widget
         return $this->value !== $this->initialValue;
     }
     public function registerAssets(PageAssetManager $manager): void
+    {
+        //to override
+    }
+    /**
+     * If you want a widget to work with another widget you could add
+     * them automatically using this callback after this widget has
+     * been added to a form.
+     **/
+    public function addAuxillaryWidgetsToForm(Form $form): void
     {
         //to override
     }

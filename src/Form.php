@@ -50,6 +50,7 @@ abstract class Form
     {
         $widget->setForm($this);
         $this->widgets[$widget->name] = $widget;
+        $widget->addAuxillaryWidgetsToForm($this);
     }
     public function removeWidget(Widget|string $widget): bool
     {
