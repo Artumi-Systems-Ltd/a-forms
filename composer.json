@@ -23,8 +23,8 @@
         }
     },
     "require": {
-        "php": "^8.2",
-        "laravel/framework": ">=10.0",
+        "php": ">8.0",
+        "laravel/framework": ">=9.0",
         "artumi-systems-ltd/page-asset-manager": ">0.1"
     },
 	"repositories": [
@@ -34,8 +34,8 @@
 		}
 	],
     "require-dev": {
-        "orchestra/testbench": "^8.20",
-        "phpunit/phpunit": "^10.5",
+        "orchestra/testbench": ">8.0",
+        "phpunit/phpunit": ">10.0",
         "ext-sqlite3": "*",
         "ext-pcov": "*"
     },
