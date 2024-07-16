@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ArtumiSystemsLtd\AForms;
 
+use Illuminate\Support\Collection;
 use \ArtumiSystemsLtd\AForms\Trait\Attributes;
 use ArtumiSystemsLtd\PageAssetManager\PageAssetManager;
 use Illuminate\Support\Facades\Validator as FValidator;
@@ -307,5 +308,64 @@ abstract class Form
         foreach ($this->widgets as $widget) {
             $widget->registerAssets($manager);
         }
+    }
+
+
+    /**
+     * Function to add a widget for each item in a collection. This is working
+     * when we're adding checkboxes, I want it to work for integers too, so we
+     * but that's not there yet.
+     *
+     * @param Collection $options,
+     * @param string $widgetBase
+     * @param string $idField, nearly always 'id'
+     * @param string $nameField, what are we showing against the widget?
+     * @param string $class, which Widget are we adding
+     * @return void
+     **/
+    public function addWidgetCollection(Collection $options, string $widgetBase, string $idField, string $nameField, string $class): void
+    {
+        foreach ($options as $item) {
+            $widget = new $class($widgetBase . '_' . $item->$idField, $item->$nameField);
+            $this->addWidget($widget);
+        }
+    }
+
+    /**
+     * Sets the selected values of a collection of widgets created by
+     * addWidgetCollection()
+     *
+     * @param Collection $chosen,
+     * @param string $widgetBase
+     * @param string $idField, nearly always 'id'
+     **/
+    public function setWidgetCollection(Collection $chosen, string $widgetBase, string $idField): void
+    {
+        foreach ($chosen  as $item) {
+            $name = $widgetBase . '_' . $item->$idField;
+            if ($this->hasWidget($name)) {
+                //todo - how do we alter this when it's not a checkbox?
+                $this->$name->set(true);
+            }
+        }
+    }
+
+    /**
+     * Function to get the values in a format for DB:sync()      *
+     * @param Collection $options,
+     * @param string $widgetBase
+     * @param string $idField, nearly always 'id'
+     * @return array [id1,id2] - suitable for sync()
+     **/
+    public function getWidgetCollectionValues(Collection $options, string $widgetBase, string $idField): array
+    {
+        $a = [];
+        foreach ($options as $item) {
+            $name = $widgetBase . '_' . $item->$idField;
+            if ($this->$name->get()) {
+                $a[] = $item->$idField;
+            }
+        }
+        return $a;
     }
 }

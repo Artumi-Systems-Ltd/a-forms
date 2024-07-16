@@ -86,3 +86,14 @@ then you could, for example add `addAdditionalValidator('max:255')`
 and, later, should you require it, remove it with
 `removeAdditionalValidator('max:255')`
 
+
+# Widget Collections
+
+We have `Form::addWidgetCollection()`, `Form::setWidgetCollection` and
+`Form::getWidgetCollectionValues` which together allow us to create
+some nice functionality around things like, for now, adding a tickbox
+for each role in a User's account
+
+It adds widgets to the form with the name in the format of `{widgetBase}_{id}`
+and then adds each one to the form.
+
