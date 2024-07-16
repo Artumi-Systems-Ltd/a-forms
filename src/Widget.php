@@ -7,6 +7,7 @@ namespace ArtumiSystemsLtd\AForms;
 use ArtumiSystemsLtd\AForms\Form;
 use ArtumiSystemsLtd\AForms\Trait\Attributes;
 use ArtumiSystemsLtd\PageAssetManager\PageAssetManager;
+use Illuminate\Validation\Rule;
 use InvalidArgumentException;
 
 /**
@@ -29,7 +30,7 @@ abstract class Widget
         $initialValue,
         $form,
         $bRequiredField = false,
-        $sAdditionalValidator = '',
+        $aAdditionalValidator = [],
         $allowed = [
             "id"
         ];
@@ -102,15 +103,14 @@ abstract class Widget
      **/
     public function validator(): string
     {
-        $s = '';
+        $a = [];
         if ($this->required()) {
-            $s = 'required';
-            if ($this->sAdditionalValidator) {
-                return $s . '|' . $this->sAdditionalValidator;
-            }
-            return $s;
+            $a[]  = 'required';
         }
-        return $this->sAdditionalValidator;
+        if (!empty($this->aAdditionalValidator)) {
+            $a = array_merge($a, $this->aAdditionalValidator);
+        }
+        return implode('|', $a);
     }
     /**
      * Adds another validator to the current string | separated list
@@ -130,9 +130,28 @@ abstract class Widget
      * Additional to the "required" validator which we manage
      * separately. See validator() function
      **/
-    public function setAdditionalValidator(string $s): void
+    public function addAdditionalValidator(string $s, string $name = null): void
     {
-        $this->sAdditionalValidator = $s;
+        if ($name) {
+            $this->aAdditionalValidator[$name] = $s;
+        } else {
+            $this->aAdditionalValidator[] = $s;
+        }
+    }
+
+
+    /**
+     * @param string $s, the validator string from laravel to remove
+     * @return bool, true if validator was present and removed, false otherwise.
+     **/
+    public function removeAdditionalValidator(string $s): bool
+    {
+        $index = array_search($s, $this->aAdditionalValidator);
+        if ($index !== false) {
+            unset($this->aAdditionalValidator[$index]);
+            return true;
+        }
+        return false;
     }
 
     public function setValidationMsg(string $sValMsg): void
@@ -210,5 +229,19 @@ abstract class Widget
     public function addAuxillaryWidgetsToForm(Form $form): void
     {
         //to override
+    }
+
+    /**
+     * Creates a validator that will manage uniqueness, pass an ID if you are
+     * updating a record.
+     * @param: string $tableName - db table,
+     * @param: mixed $id - id value
+     * @return void
+     **/
+    public function setUnique(string $tableName, $excludeID = null): void
+    {
+        $rule = Rule::unique($tableName);
+        if (!is_null($excludeID)) $rule->ignore($excludeID);
+        $this->addAdditionalValidator($rule->__toString(), 'unique');
     }
 }

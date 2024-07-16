@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Workbench\App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,5 +12,4 @@ class Article extends Model
     {
         return $this->belongsToMany(Category::class);
     }
-
 }

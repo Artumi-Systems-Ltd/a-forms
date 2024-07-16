@@ -72,3 +72,17 @@ This package uses artumi-systems-ltd/page-asset-manager for this job, and you sh
 to this:
 
 https://github.com/Artumi-Systems-Ltd/page-asset-manager
+
+
+# Validation
+
+Each widget has functions to do the validation, you assign the
+validator to the widget. They can be written to allow themselves to
+add more validation as required. The validation is built on top of
+Laravel's validation, so essentially it's all about producing a
+validator string, but the parent Widget class does have
+`setRequired()` and `setUnique()` functions to do the two main things,
+then you could, for example add `addAdditionalValidator('max:255')`
+and, later, should you require it, remove it with
+`removeAdditionalValidator('max:255')`
+
