@@ -27,12 +27,12 @@
         "laravel/framework": ">=9.0",
         "artumi-systems-ltd/page-asset-manager": ">0.1"
     },
-	"repositories": [
-		{
-			"type": "composer",
-			"url": "https://composer.artumi.com/packages.json"
-		}
-	],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://composer.artumi.com/packages.json"
+        }
+    ],
     "require-dev": {
         "orchestra/testbench": ">8.0",
         "phpunit/phpunit": ">10.0",
@@ -58,6 +58,9 @@
             "Composer\\Config::disableProcessTimeout",
             "@build",
             "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@php vendor/bin/phpstan analyse"
         ]
     }
 }
