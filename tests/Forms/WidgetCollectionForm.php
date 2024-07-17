@@ -16,8 +16,8 @@ class WidgetCollectionForm extends Form
         $options = Author::all();
         $chosen = collect([$options[0]]);
 
-        $this->addWidgetCollection($options, 'author', 'id', 'name', Checkbox::class);
-        $this->setWidgetCollection($chosen, 'author', 'id');
+        $this->createWidgetCollection('author', $options, 'id', 'name', Checkbox::class);
+        $this->setWidgetCollectionValues('author', $chosen);
         $this->addButton('ok', 'Submit');
     }
 }

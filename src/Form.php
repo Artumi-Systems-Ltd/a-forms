@@ -24,6 +24,7 @@ abstract class Form
     private ?Validator $lastValidator = null;
     private string $sAction = '';
     private string $sMethod = 'post';
+    private array $widgetCollections = [];
 
 
     public $allowed = [
@@ -316,17 +317,23 @@ abstract class Form
      * when we're adding checkboxes, I want it to work for integers too, so we
      * but that's not there yet.
      *
+     * @param string $widgetBaseName
      * @param Collection $options,
-     * @param string $widgetBase
      * @param string $idField, nearly always 'id'
      * @param string $nameField, what are we showing against the widget?
      * @param string $class, which Widget are we adding
      * @return void
      **/
-    public function addWidgetCollection(Collection $options, string $widgetBase, string $idField, string $nameField, string $class): void
+    public function createWidgetCollection(string $widgetBaseName, Collection $options, string $idField, string $nameField, string $class): void
     {
+        $this->widgetCollections[$widgetBaseName] = [
+            'options' => $options,
+            'idfield' => $idField,
+            'namefield' => $nameField,
+            'class' => $class
+        ];
         foreach ($options as $item) {
-            $widget = new $class($widgetBase . '_' . $item->$idField, $item->$nameField);
+            $widget = new $class($widgetBaseName . '_' . $item->$idField, $item->$nameField);
             $this->addWidget($widget);
         }
     }
@@ -335,14 +342,15 @@ abstract class Form
      * Sets the selected values of a collection of widgets created by
      * addWidgetCollection()
      *
-     * @param Collection $chosen,
-     * @param string $widgetBase
-     * @param string $idField, nearly always 'id'
+     * @param string $widgetBaseName
+     * @param Collection $chosen[$idField],
+     * @return void
      **/
-    public function setWidgetCollection(Collection $chosen, string $widgetBase, string $idField): void
+    public function setWidgetCollectionValues(string $widgetBaseName, Collection $chosen): void
     {
+        $idField = $this->widgetCollections[$widgetBaseName]['idfield'];
         foreach ($chosen  as $item) {
-            $name = $widgetBase . '_' . $item->$idField;
+            $name = $widgetBaseName . '_' . $item->$idField;
             if ($this->hasWidget($name)) {
                 //todo - how do we alter this when it's not a checkbox?
                 $this->$name->set(true);
@@ -352,16 +360,16 @@ abstract class Form
 
     /**
      * Function to get the values in a format for DB:sync()      *
-     * @param Collection $options,
-     * @param string $widgetBase
-     * @param string $idField, nearly always 'id'
+     * @param string $widgetBaseName
      * @return array [id1,id2] - suitable for sync()
      **/
-    public function getWidgetCollectionValues(Collection $options, string $widgetBase, string $idField): array
+    public function getWidgetCollectionValues(string $widgetBaseName): array
     {
+        $idField = $this->widgetCollections[$widgetBaseName]['idfield'];
+        $options = $this->widgetCollections[$widgetBaseName]['options'];
         $a = [];
         foreach ($options as $item) {
-            $name = $widgetBase . '_' . $item->$idField;
+            $name = $widgetBaseName . '_' . $item->$idField;
             if ($this->$name->get()) {
                 $a[] = $item->$idField;
             }

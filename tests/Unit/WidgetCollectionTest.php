@@ -29,14 +29,14 @@ class WidgetCollectionTest extends TestCase
         $form->populateFromTransaction($a);
 
 
-        $this->assertEquals([1], $form->getWidgetCollectionValues(Author::all(), 'author', 'id'), 'Stephen King selected');
+        $this->assertEquals([1], $form->getWidgetCollectionValues('author'), 'Stephen King selected');
 
         $a = ['author_1' => true, 'author_2' => true];
         $form->populateFromTransaction($a);
-        $this->assertEquals([1, 2], $form->getWidgetCollectionValues(Author::all(), 'author', 'id'), 'Both selected');
+        $this->assertEquals([1, 2], $form->getWidgetCollectionValues('author'), 'Both selected');
 
         $a = [];
         $form->populateFromTransaction($a);
-        $this->assertEquals([], $form->getWidgetCollectionValues(Author::all(), 'author', 'id'), 'none selected');
+        $this->assertEquals([], $form->getWidgetCollectionValues('author'), 'none selected');
     }
 }

@@ -89,7 +89,7 @@ and, later, should you require it, remove it with
 
 # Widget Collections
 
-We have `Form::addWidgetCollection()`, `Form::setWidgetCollection` and
+We have `Form::createWidgetCollection()`, `Form::setWidgetCollectionValues` and
 `Form::getWidgetCollectionValues` which together allow us to create
 some nice functionality around things like, for now, adding a tickbox
 for each role in a User's account
