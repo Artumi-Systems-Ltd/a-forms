@@ -97,3 +97,10 @@ for each role in a User's account
 It adds widgets to the form with the name in the format of `{widgetBase}_{id}`
 and then adds each one to the form.
 
+
+# Model Select
+
+It's often that we want to have all the entries of one model appear in
+a select, so that's what `ModelSelect` is about. But actually using the
+`CollectionSelect` might be better when the selection is complicated.
+
