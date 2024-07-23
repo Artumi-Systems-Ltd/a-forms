@@ -20,5 +20,8 @@ class CollectionSelectFormTest extends TestCase
         $a = ['colour' => 3];
         $form->populateFromTransaction($a);
         $this->assertEquals(3, $form->getWidget('colour')->get(), 'Option 3 selected');
+        $a = ['colour' => 5];
+        $form->populateFromTransaction($a);
+        $this->assertEquals(3, $form->getWidget('colour')->get(), 'Option 3  still selected as 5 isnt in the options');
     }
 }

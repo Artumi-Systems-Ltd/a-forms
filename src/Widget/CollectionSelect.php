@@ -2,7 +2,6 @@
 
 namespace ArtumiSystemsLtd\AForms\Widget;
 
-use ArtumiSystemsLtd\AForms\Widget;
 use ArtumiSystemsLtd\AForms\Option;
 use Illuminate\Support\Collection;
 

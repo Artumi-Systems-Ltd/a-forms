@@ -32,4 +32,10 @@ class Select extends Widget
             $this->options[$k] = new Option($k, $v);
         }
     }
+
+    public function set($value)
+    {
+        if (isset($this->options[$value]) || is_null($value))
+            $this->value = $value;
+    }
 }
